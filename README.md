@@ -7,7 +7,7 @@
 
 ## Contents
 
-### First Term ![image](https://progress-bar.dev/100/?title=Done)
+### First Term ![image](https://progress-bar.dev/100/?title=InProgress)
 
 - [Unit 1: Diploma Prerequisites](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S) ![image](https://progress-bar.dev/100/?title=CreateRepo&color=bababa)
 - [Unit 2: C Programming](01_Unit2_C_Programming) ![image](https://progress-bar.dev/100/)
