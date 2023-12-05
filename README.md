@@ -9,12 +9,12 @@
 
 ### First Term ![image](https://progress-bar.dev/100/?title=InProgress)
 
-- [**Unit 1: Diploma Prerequisites**](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S)
+- [**00_Unit1_Diploma_Prerequisites**](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S)
  ![image](https://progress-bar.dev/100/)
-- [**Unit 2: C Programming**](01_Unit2_C_Programming) ![image](https://progress-bar.dev/100/)
-- [**Unit 3: Embedded C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
-- [**Unit 4: System Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
-- [**Unit 5: First Term Projects**] ![image](https://progress-bar.dev/50/)
+- [**01_Unit2_C_Programming**](01_Unit2_C_Programming) ![image](https://progress-bar.dev/100/)
+- [**02_Unit3_Embedded_C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
+- [**03_Unit4_System_Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
+
 
 ---
 
