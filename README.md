@@ -7,9 +7,10 @@
 
 ## 📚 Contents
 
-### First Term ![In Progress](https://progress-bar.dev/100/?title=InProgress)
+### First Term ![image](https://progress-bar.dev/100/?title=InProgress)
 
-- [**Unit 1: Diploma Prerequisites**](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S) ![image](https://progress-bar.dev/100/&color=bababa)
+- [**Unit 1: Diploma Prerequisites**](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S)
+ ![image](https://progress-bar.dev/100/)
 - [**Unit 2: C Programming**](01_Unit2_C_Programming) ![image](https://progress-bar.dev/100/)
 - [**Unit 3: Embedded C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [**Unit 4: System Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
