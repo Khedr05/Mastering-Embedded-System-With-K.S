@@ -334,7 +334,7 @@ EN_LINKEDLIST_status_t  LINKEDLIST_uddtGetNthNodeFromTheEnd(ST_linkedListNode_t 
 	if(PS_copyUddtLinkedList != PTR_NULL)
 	{
 		uint8 u8TempText[50],u8FoundFlag = 0;
-		uint32 u32SelectedIndex,u32Count = 0,listSize = 0;
+		uint32 u32SelectedIndex,u32Count = 0;
 
 		/* get id from user  */
 
@@ -345,51 +345,41 @@ EN_LINKEDLIST_status_t  LINKEDLIST_uddtGetNthNodeFromTheEnd(ST_linkedListNode_t 
 		ST_linkedListNode_t *p_uddtSelectedIndex = PS_copyUddtLinkedList->P_nextStudentNode ;
 		ST_linkedListNode_t *p_uddtreference = PS_copyUddtLinkedList->P_nextStudentNode ;
 
-		listSize = LINKEDLIST_u32GetLengthRecursive(PS_copyUddtLinkedList);
-
-		if((u32SelectedIndex <= listSize) && (u32SelectedIndex > 0) )
+		while(p_uddtreference->P_nextStudentNode != PTR_NULL)
 		{
-			while(p_uddtreference->P_nextStudentNode != PTR_NULL)
+			if(u32SelectedIndex == u32Count )
 			{
-				if(u32SelectedIndex == u32Count )
-				{
-					break;
-				}
-				else
-				{
-					p_uddtreference = p_uddtreference->P_nextStudentNode;
-					u32Count++;
-				}
-			}
-
-			while(p_uddtreference->P_nextStudentNode != PTR_NULL)
-			{
-				p_uddtreference = p_uddtreference->P_nextStudentNode;
-				p_uddtSelectedIndex = p_uddtSelectedIndex->P_nextStudentNode;
-			}
-
-			if( p_uddtSelectedIndex  != PTR_NULL)
-			{
-				u8FoundFlag = 1;
-				DPRINTF("\nNode Index From The End : %d",u32SelectedIndex+1);
-				DPRINTF("\nID : %d",p_uddtSelectedIndex->ST_uddtStudentData.ID);
-				DPRINTF("\nName : %s",p_uddtSelectedIndex->ST_uddtStudentData.name);
-				DPRINTF("\nHeight : %f",p_uddtSelectedIndex->ST_uddtStudentData.height);
+				break;
 			}
 			else
 			{
-				/* Do Nothing */
+				p_uddtreference = p_uddtreference->P_nextStudentNode;
+				u32Count++;
 			}
+		}
 
-			if(u8FoundFlag == 0)
-				DPRINTF("\nThis Node Index Is Empty ");
+		while(p_uddtreference->P_nextStudentNode != PTR_NULL)
+		{
+			p_uddtreference = p_uddtreference->P_nextStudentNode;
+			p_uddtSelectedIndex = p_uddtSelectedIndex->P_nextStudentNode;
+		}
 
+		if( p_uddtSelectedIndex  != PTR_NULL)
+		{
+			u8FoundFlag = 1;
+			DPRINTF("\nNode Index From The End : %d",u32SelectedIndex+1);
+			DPRINTF("\nID : %d",p_uddtSelectedIndex->ST_uddtStudentData.ID);
+			DPRINTF("\nName : %s",p_uddtSelectedIndex->ST_uddtStudentData.name);
+			DPRINTF("\nHeight : %f",p_uddtSelectedIndex->ST_uddtStudentData.height);
 		}
 		else
 		{
-			DPRINTF("\nThis Index Is Out Of Range ");
-			ret = LINKED_LIST_INDEX_OUT_OF_RANGE;
+			/* Do Nothing */
 		}
+
+		if(u8FoundFlag == 0)
+			DPRINTF("\nThis Node Index Is Empty ");
+
 	}
 	else
 	{
@@ -525,40 +515,40 @@ EN_LINKEDLIST_status_t  LINKEDLIST_uddtDetectLoop(ST_linkedListNode_t *PS_copyUd
 
 EN_LINKEDLIST_status_t LINKEDLIST_uddtReverseRecords(ST_linkedListNode_t* PS_copyUddtLinkedList)
 {
-    EN_LINKEDLIST_status_t ret = LINKED_LIST_NOK;
+	EN_LINKEDLIST_status_t ret = LINKED_LIST_NOK;
 
-    if (PS_copyUddtLinkedList != PTR_NULL)
-    {
-        ST_linkedListNode_t* p_uddtnew = PTR_NULL;
-        ST_linkedListNode_t* p_uddtold = PS_copyUddtLinkedList->P_nextStudentNode;
-        ST_linkedListNode_t* p_temp = PTR_NULL;
+	if (PS_copyUddtLinkedList != PTR_NULL)
+	{
+		ST_linkedListNode_t* p_uddtnew = PTR_NULL;
+		ST_linkedListNode_t* p_uddtold = PS_copyUddtLinkedList->P_nextStudentNode;
+		ST_linkedListNode_t* p_temp = PTR_NULL;
 
-        while (p_uddtold != PTR_NULL)
-        {
-            p_temp = p_uddtnew;
-            p_uddtnew = (ST_linkedListNode_t*)malloc(sizeof(ST_linkedListNode_t));
+		while (p_uddtold != PTR_NULL)
+		{
+			p_temp = p_uddtnew;
+			p_uddtnew = (ST_linkedListNode_t*)malloc(sizeof(ST_linkedListNode_t));
 
-            // Copy the data from the old node to the new node
-            p_uddtnew->ST_uddtStudentData = p_uddtold->ST_uddtStudentData;
+			// Copy the data from the old node to the new node
+			p_uddtnew->ST_uddtStudentData = p_uddtold->ST_uddtStudentData;
 
-            // Link the new node to the reversed list
-            p_uddtnew->P_nextStudentNode = p_temp;
+			// Link the new node to the reversed list
+			p_uddtnew->P_nextStudentNode = p_temp;
 
-            // Move to the next node in the original list
-            p_uddtold = p_uddtold->P_nextStudentNode;
-        }
+			// Move to the next node in the original list
+			p_uddtold = p_uddtold->P_nextStudentNode;
+		}
 
-        // Now, p_uddtnew points to the head of the reversed list
-        LINKEDLIST_uddtViewRecords(p_uddtnew);
+		// Now, p_uddtnew points to the head of the reversed list
+		LINKEDLIST_uddtViewRecords(p_uddtnew);
 
-        PS_copyUddtLinkedList = p_uddtnew;
-    }
-    else
-    {
-        ret = LINKED_LIST_PTR_NULL;
-    }
+		PS_copyUddtLinkedList = p_uddtnew;
+	}
+	else
+	{
+		ret = LINKED_LIST_PTR_NULL;
+	}
 
-    return ret;
+	return ret;
 }
 
 
