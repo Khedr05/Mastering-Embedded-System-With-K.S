@@ -13,7 +13,7 @@
 - [**Unit 2: Unleashing C Magic**](01_Unit2_C_Programming) ![Completed](https://progress-bar.dev/100/?title=Completed)
 - [**Unit 3: Mastering Embedded C**](02_Unit3_Embedded_C) ![Completed](https://progress-bar.dev/100/?title=Completed)
 - [**Unit 4: Architecting Systems**](03_Unit4_System_Architect) ![Completed](https://progress-bar.dev/100/?title=Completed)
-- [**Unit 5: First Term Projects**]() ![InProgress](https://progress-bar.dev/0/?title=InProgress)
+- [**Unit 5: First Term Projects**]() ![InProgress](https://progress-bar.dev/50/?title=InProgress)
 
 ---
 
