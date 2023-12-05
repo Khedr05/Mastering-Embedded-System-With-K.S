@@ -18,7 +18,7 @@
 
 ---
 
-## 🚀 Overall Progress ![image](https://progress-bar.dev/0.5/?scale=3&title=Terms&suffix=&width=230&color=aa00ff)
+## 🚀 Overall Progress ![image](https://progress-bar.dev/0/?scale=3&title=Terms&suffix=&width=230&color=aa00ff)
 
 [![image](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S/blob/main/Images/01_certification.png)](https://www.learn-in-depth-store.com/certificate/sherifkhadr1%40gmail.com)
 
