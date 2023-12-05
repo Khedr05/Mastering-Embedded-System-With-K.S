@@ -1,7 +1,7 @@
 # Mastering Embedded System With Eng Keroles Shenouda
 # Sherif Ashraf Khedr ; 
 
-[![image](https://drive.google.com/file/d/1O-XvNDbC0PAuyGOICV6MdF8xlIjG2el7/view?usp=sharing)](https://www.learn-in-depth-store.com/certificate/sherifkhadr1%40gmail.com)
+[![image](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S/blob/main/Images/00_Top_In_First_Exam.jpg)](https://www.learn-in-depth-store.com/certificate/sherifkhadr1%40gmail.com)
 
 ---
 
@@ -14,5 +14,15 @@
 - [Unit 3: Embedded C](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [Unit 4: System Architect](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
 - [Unit 5: First Term Projects]() ![image](https://progress-bar.dev/0/)
+
+---
+
+## Overall progress ![image](https://progress-bar.dev/0/?scale=3&title=Terms&suffix=&width=230&color=aa00ff)
+
+[![image](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S/blob/main/Images/01_certification.png)](https://www.learn-in-depth-store.com/certificate/sherifkhadr1%40gmail.com)
+
+---
+
+## My Progress Profile: [Click Here](https://www.learn-in-depth-store.com/certificate/sherifkhadr1%40gmail.com)
 
 ---
