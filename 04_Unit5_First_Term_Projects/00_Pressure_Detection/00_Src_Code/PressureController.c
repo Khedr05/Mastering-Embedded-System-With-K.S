@@ -12,22 +12,17 @@
 #include "driver.h"
 
 #define THRESHOLD_VAL		20
-
 static int currentPressure = 0;
-
 void (*PC_State)();
-
 
 void highPressureDetected()
 {
-	// set the state 
-	PC_State = STATE(PC_HIGH_PRESSURE);
+	PC_State = STATE(PC_HIGH_PRESSURE); 	// set the state 
 }
 
 void setPressureVal(int val)
 {
-	// get the value of the pressure 
-	currentPressure = val;
+	currentPressure = val; 	// get the value of the pressure 
 }
 
 void PC_init(void)
@@ -45,23 +40,18 @@ void PC_pressureMonitor(void)
 	while(1)
 	{
 		PS_State();
-		if(currentPressure >= THRESHOLD_VAL)
+		if(currentPressure > THRESHOLD_VAL)
 			highPressureDetected();
 		PC_State();
 	}
 }
 
-
 STATE_DEFINE(PC_HIGH_PRESSURE)
 {
-	// start alarm
-	StartAlarm();
-	Delay(6000);
-	StopAlarm();
-	// set state to check the pressure again
-	// set the state of sensor module to PC_BELOW_PRESSURE
-	PC_State = STATE(PC_BELOW_PRESSURE);
-
+	StartAlarm();// Start alarm
+	Delay(6000); // Delay for 60s
+	StopAlarm(); // Stop alarm
+	PC_State = STATE(PC_BELOW_PRESSURE); // set the state of sensor module to PC_BELOW_PRESSURE
 }
 
 STATE_DEFINE(PC_BELOW_PRESSURE)

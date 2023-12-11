@@ -16,40 +16,29 @@ void (*PS_State)();
 
 void PS_init(void)
 {
-	// init sensor
-	GPIO_INITIALIZATION();
-	// set the new state in the pointer
-	PS_State = STATE(PS_READING);
+	GPIO_INITIALIZATION(); // init sensor
+	PS_State = STATE(PS_READING); 	// set the new state in the pointer
 }
 
 STATE_DEFINE(PS_READING)
 {
-	// set current state
-	PSCurrentState = PS_READING;
-	// read the value of the sensor
-	pressureVal = getPressureVal();
-	// set the new state in the pointer
-	PS_State = STATE(PS_SEND_VAL);
+	PSCurrentState = PS_READING; 	// set current state
+	pressureVal = getPressureVal(); // read the value of the sensor
+	PS_State = STATE(PS_SEND_VAL); 	// set the new state in the pointer
 }
 
 STATE_DEFINE(PS_SEND_VAL)
 {
-	// set current state
-	PSCurrentState = PS_SEND_VAL;
-	// update the value
-	setPressureVal(pressureVal);
-	// set the new state in the pointer
-	PS_State = STATE(PS_WAITING);
+	PSCurrentState = PS_SEND_VAL; 	// set current state
+	setPressureVal(pressureVal); 	// update the value
+	PS_State = STATE(PS_WAITING); 	// set the new state in the pointer
 }
 
 STATE_DEFINE(PS_WAITING)
 {
-	// set current state
-	PSCurrentState = PS_WAITING;
-	// wait for the delay
-	Delay(10000);
-	// set the new state in the pointer
-	PS_State = STATE(PS_READING);
+	PSCurrentState = PS_WAITING; 	// set current state
+	Delay(10000); 	// wait for the delay
+	PS_State = STATE(PS_READING); 	// set the new state in the pointer
 }
 
 
