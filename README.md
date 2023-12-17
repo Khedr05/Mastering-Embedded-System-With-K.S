@@ -14,6 +14,7 @@
 - [**01_Unit2_C_Programming**](01_Unit2_C_Programming) ![image](https://progress-bar.dev/100/)
 - [**02_Unit3_Embedded_C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [**03_Unit4_System_Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
+- [**04_Unit5_First_Term_Projects**](04_Unit5_First_Term_Projects) ![image](https://progress-bar.dev/100/)
 
 
 ---
