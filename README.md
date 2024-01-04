@@ -15,7 +15,8 @@
 - [**02_Unit3_Embedded_C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [**03_Unit4_System_Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
 - [**04_Unit5_First_Term_Projects**](04_Unit5_First_Term_Projects) ![image](https://progress-bar.dev/100/)
-- [**05_Unit6_MCU_Architecture**](05_Unit6_MCU_Architecture) ![image](https://progress-bar.dev/100/)
+- [**05_Unit6_MCU_Fundamentals**](05_Unit6_MCU_Fundamentals) ![image](https://progress-bar.dev/100/)
+- [**06_Unit7_MCU_Essential_Peripherals**](06_Unit7_MCU_Essential_Peripherals) ![image](https://progress-bar.dev/0/)
 
 
 ---
