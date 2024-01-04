@@ -46,7 +46,7 @@ void vEXTI_config(void);
 int main(void)
 {
 	vCLOCK_init();
-	vCLOCK_init();
+	vGPIO_init();
 	vEXTI_config();
 
 	while(1);
