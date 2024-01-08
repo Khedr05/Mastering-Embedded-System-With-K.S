@@ -1,0 +1,4 @@
+../Src/main.c:16:5:main	4
+../Src/main.c:45:6:vCLOCK_init	1
+../Src/main.c:51:6:vGPIO_init	1
+../Src/main.c:77:6:vWaitMs	3

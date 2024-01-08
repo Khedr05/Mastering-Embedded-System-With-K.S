@@ -1,0 +1,10 @@
+../Src/MCAL/GPIO/GPIO.c:22:23:Get_CRLH_Position	24	static
+../Src/MCAL/GPIO/GPIO.c:89:23:MGPIO_uddtInitPin	32	static
+../Src/MCAL/GPIO/GPIO.c:156:23:MGPIO_uddtGetPin	32	static
+../Src/MCAL/GPIO/GPIO.c:186:23:MGPIO_uddtSetPin	24	static
+../Src/MCAL/GPIO/GPIO.c:228:23:MGPIO_uddtTogPin	24	static
+../Src/MCAL/GPIO/GPIO.c:257:23:MGPIO_uddtLockPin	24	static
+../Src/MCAL/GPIO/GPIO.c:300:23:MGPIO_uddtIsPinLock	32	static
+../Src/MCAL/GPIO/GPIO.c:344:23:MGPIO_uddtGetPort	24	static
+../Src/MCAL/GPIO/GPIO.c:366:23:MGPIO_uddtSetPort	24	static
+../Src/MCAL/GPIO/GPIO.c:388:23:MGPIO_uddtResetPort	24	static
