@@ -1,0 +1,989 @@
+
+05_ToggleLed_U7L3A1.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   00000130  08000000  08000000  00010000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         0000052c  08000130  08000130  00010130  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000000  0800065c  08000664  00010664  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.extab    00000000  0800065c  0800065c  00010664  2**0
+                  CONTENTS
+  4 .ARM          00000000  0800065c  0800065c  00010664  2**0
+                  CONTENTS
+  5 .preinit_array 00000000  0800065c  08000664  00010664  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  0800065c  0800065c  0001065c  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .fini_array   00000004  08000660  08000660  00010660  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .data         00000000  20000000  20000000  00010664  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          00000024  20000000  08000664  00020000  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000604  20000024  08000664  00020024  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000029  00000000  00000000  00010664  2**0
+                  CONTENTS, READONLY
+ 12 .comment      00000043  00000000  00000000  0001068d  2**0
+                  CONTENTS, READONLY
+ 13 .debug_info   00000bc5  00000000  00000000  000106d0  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_abbrev 000002f1  00000000  00000000  00011295  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 15 .debug_loc    00000490  00000000  00000000  00011586  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 16 .debug_aranges 000000c8  00000000  00000000  00011a18  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 17 .debug_ranges 000000c0  00000000  00000000  00011ae0  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 18 .debug_macro  00001105  00000000  00000000  00011ba0  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 19 .debug_line   00000eb6  00000000  00000000  00012ca5  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 20 .debug_str    00004627  00000000  00000000  00013b5b  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 21 .debug_frame  0000025c  00000000  00000000  00018184  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+Disassembly of section .text:
+
+08000130 <__do_global_dtors_aux>:
+ 8000130:	b510      	push	{r4, lr}
+ 8000132:	4c05      	ldr	r4, [pc, #20]	; (8000148 <__do_global_dtors_aux+0x18>)
+ 8000134:	7823      	ldrb	r3, [r4, #0]
+ 8000136:	b933      	cbnz	r3, 8000146 <__do_global_dtors_aux+0x16>
+ 8000138:	4b04      	ldr	r3, [pc, #16]	; (800014c <__do_global_dtors_aux+0x1c>)
+ 800013a:	b113      	cbz	r3, 8000142 <__do_global_dtors_aux+0x12>
+ 800013c:	4804      	ldr	r0, [pc, #16]	; (8000150 <__do_global_dtors_aux+0x20>)
+ 800013e:	f3af 8000 	nop.w
+ 8000142:	2301      	movs	r3, #1
+ 8000144:	7023      	strb	r3, [r4, #0]
+ 8000146:	bd10      	pop	{r4, pc}
+ 8000148:	20000000 	.word	0x20000000
+ 800014c:	00000000 	.word	0x00000000
+ 8000150:	08000644 	.word	0x08000644
+
+08000154 <frame_dummy>:
+ 8000154:	b508      	push	{r3, lr}
+ 8000156:	4b03      	ldr	r3, [pc, #12]	; (8000164 <frame_dummy+0x10>)
+ 8000158:	b11b      	cbz	r3, 8000162 <frame_dummy+0xe>
+ 800015a:	4903      	ldr	r1, [pc, #12]	; (8000168 <frame_dummy+0x14>)
+ 800015c:	4803      	ldr	r0, [pc, #12]	; (800016c <frame_dummy+0x18>)
+ 800015e:	f3af 8000 	nop.w
+ 8000162:	bd08      	pop	{r3, pc}
+ 8000164:	00000000 	.word	0x00000000
+ 8000168:	20000004 	.word	0x20000004
+ 800016c:	08000644 	.word	0x08000644
+
+08000170 <Get_CRLH_Position>:
+// APIs Supported by "MCAL GPIO DRIVER"
+//===============================================
+
+
+COMMON_uddtApiState_t Get_CRLH_Position(MGPIO_uddtPinNumber_t uddtPinNumber ,uint8 *u8RetOfPosition)
+{
+ 8000170:	b480      	push	{r7}
+ 8000172:	b085      	sub	sp, #20
+ 8000174:	af00      	add	r7, sp, #0
+ 8000176:	4603      	mov	r3, r0
+ 8000178:	6039      	str	r1, [r7, #0]
+ 800017a:	71fb      	strb	r3, [r7, #7]
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+ 800017c:	2300      	movs	r3, #0
+ 800017e:	73fb      	strb	r3, [r7, #15]
+	if(u8RetOfPosition != NULL_PTR)
+ 8000180:	683b      	ldr	r3, [r7, #0]
+ 8000182:	2b00      	cmp	r3, #0
+ 8000184:	d05d      	beq.n	8000242 <Get_CRLH_Position+0xd2>
+	{
+		if( (uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
+ 8000186:	79fb      	ldrb	r3, [r7, #7]
+ 8000188:	2b0f      	cmp	r3, #15
+ 800018a:	d85c      	bhi.n	8000246 <Get_CRLH_Position+0xd6>
+		{
+			switch(uddtPinNumber){
+ 800018c:	79fb      	ldrb	r3, [r7, #7]
+ 800018e:	2b0f      	cmp	r3, #15
+ 8000190:	d852      	bhi.n	8000238 <Get_CRLH_Position+0xc8>
+ 8000192:	a201      	add	r2, pc, #4	; (adr r2, 8000198 <Get_CRLH_Position+0x28>)
+ 8000194:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000198:	080001d9 	.word	0x080001d9
+ 800019c:	080001e5 	.word	0x080001e5
+ 80001a0:	080001f1 	.word	0x080001f1
+ 80001a4:	080001fd 	.word	0x080001fd
+ 80001a8:	08000209 	.word	0x08000209
+ 80001ac:	08000215 	.word	0x08000215
+ 80001b0:	08000221 	.word	0x08000221
+ 80001b4:	0800022d 	.word	0x0800022d
+ 80001b8:	080001d9 	.word	0x080001d9
+ 80001bc:	080001e5 	.word	0x080001e5
+ 80001c0:	080001f1 	.word	0x080001f1
+ 80001c4:	080001fd 	.word	0x080001fd
+ 80001c8:	08000209 	.word	0x08000209
+ 80001cc:	08000215 	.word	0x08000215
+ 80001d0:	08000221 	.word	0x08000221
+ 80001d4:	0800022d 	.word	0x0800022d
+			case MGPIO_PIN0:
+			case MGPIO_PIN8:
+				*u8RetOfPosition = 0;
+ 80001d8:	683b      	ldr	r3, [r7, #0]
+ 80001da:	2200      	movs	r2, #0
+ 80001dc:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 80001de:	2301      	movs	r3, #1
+ 80001e0:	73fb      	strb	r3, [r7, #15]
+				break;
+ 80001e2:	e02b      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN1:
+			case MGPIO_PIN9:
+				*u8RetOfPosition = 4;
+ 80001e4:	683b      	ldr	r3, [r7, #0]
+ 80001e6:	2204      	movs	r2, #4
+ 80001e8:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 80001ea:	2301      	movs	r3, #1
+ 80001ec:	73fb      	strb	r3, [r7, #15]
+				break;
+ 80001ee:	e025      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN2:
+			case MGPIO_PIN10:
+				*u8RetOfPosition = 8;
+ 80001f0:	683b      	ldr	r3, [r7, #0]
+ 80001f2:	2208      	movs	r2, #8
+ 80001f4:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 80001f6:	2301      	movs	r3, #1
+ 80001f8:	73fb      	strb	r3, [r7, #15]
+				break;
+ 80001fa:	e01f      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN3:
+			case MGPIO_PIN11:
+				*u8RetOfPosition = 12;
+ 80001fc:	683b      	ldr	r3, [r7, #0]
+ 80001fe:	220c      	movs	r2, #12
+ 8000200:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 8000202:	2301      	movs	r3, #1
+ 8000204:	73fb      	strb	r3, [r7, #15]
+				break;
+ 8000206:	e019      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN4:
+			case MGPIO_PIN12:
+				*u8RetOfPosition = 16;
+ 8000208:	683b      	ldr	r3, [r7, #0]
+ 800020a:	2210      	movs	r2, #16
+ 800020c:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 800020e:	2301      	movs	r3, #1
+ 8000210:	73fb      	strb	r3, [r7, #15]
+				break;
+ 8000212:	e013      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN5:
+			case MGPIO_PIN13:
+				*u8RetOfPosition = 20;
+ 8000214:	683b      	ldr	r3, [r7, #0]
+ 8000216:	2214      	movs	r2, #20
+ 8000218:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 800021a:	2301      	movs	r3, #1
+ 800021c:	73fb      	strb	r3, [r7, #15]
+				break;
+ 800021e:	e00d      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN6:
+			case MGPIO_PIN14:
+				*u8RetOfPosition = 24;
+ 8000220:	683b      	ldr	r3, [r7, #0]
+ 8000222:	2218      	movs	r2, #24
+ 8000224:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 8000226:	2301      	movs	r3, #1
+ 8000228:	73fb      	strb	r3, [r7, #15]
+				break;
+ 800022a:	e007      	b.n	800023c <Get_CRLH_Position+0xcc>
+			case MGPIO_PIN7:
+			case MGPIO_PIN15:
+				*u8RetOfPosition = 28;
+ 800022c:	683b      	ldr	r3, [r7, #0]
+ 800022e:	221c      	movs	r2, #28
+ 8000230:	701a      	strb	r2, [r3, #0]
+				ret = UAPI_OK;
+ 8000232:	2301      	movs	r3, #1
+ 8000234:	73fb      	strb	r3, [r7, #15]
+				break;
+ 8000236:	e001      	b.n	800023c <Get_CRLH_Position+0xcc>
+			default: ret = UAPI_INVALID_PARM;
+ 8000238:	2304      	movs	r3, #4
+ 800023a:	73fb      	strb	r3, [r7, #15]
+			}
+			ret = UAPI_INVALID_PARM;
+ 800023c:	2304      	movs	r3, #4
+ 800023e:	73fb      	strb	r3, [r7, #15]
+ 8000240:	e001      	b.n	8000246 <Get_CRLH_Position+0xd6>
+		}
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+ 8000242:	2302      	movs	r3, #2
+ 8000244:	73fb      	strb	r3, [r7, #15]
+	}
+	return ret;
+ 8000246:	7bfb      	ldrb	r3, [r7, #15]
+}
+ 8000248:	4618      	mov	r0, r3
+ 800024a:	3714      	adds	r7, #20
+ 800024c:	46bd      	mov	sp, r7
+ 800024e:	bc80      	pop	{r7}
+ 8000250:	4770      	bx	lr
+ 8000252:	bf00      	nop
+
+08000254 <MGPIO_uddtInitPin>:
+ * @Brief         : Initialises a GPIO pin according to the specified configuration.
+ * @param [in]    : uddtpinConfig : Pointer to the structure containing pin configurations.
+ * @Retval        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
+COMMON_uddtApiState_t MGPIO_uddtInitPin(GPIO_uddtPinConfig_t *uddtpinConfig)
+{
+ 8000254:	b580      	push	{r7, lr}
+ 8000256:	b086      	sub	sp, #24
+ 8000258:	af00      	add	r7, sp, #0
+ 800025a:	6078      	str	r0, [r7, #4]
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+ 800025c:	2300      	movs	r3, #0
+ 800025e:	75fb      	strb	r3, [r7, #23]
+
+	if(uddtpinConfig != NULL_PTR)
+ 8000260:	687b      	ldr	r3, [r7, #4]
+ 8000262:	2b00      	cmp	r3, #0
+ 8000264:	f000 80a2 	beq.w	80003ac <MGPIO_uddtInitPin+0x158>
+	{
+		uint8 u8PinPosationVal;
+		vuint32 *vu32ConfigReg = NULL_PTR;
+ 8000268:	2300      	movs	r3, #0
+ 800026a:	613b      	str	r3, [r7, #16]
+		uint8 u8PinConfigVal = 0;
+ 800026c:	2300      	movs	r3, #0
+ 800026e:	73fb      	strb	r3, [r7, #15]
+
+		ret = Get_CRLH_Position(uddtpinConfig->uddtPinNumber ,&u8PinPosationVal);
+ 8000270:	687b      	ldr	r3, [r7, #4]
+ 8000272:	791b      	ldrb	r3, [r3, #4]
+ 8000274:	f107 020e 	add.w	r2, r7, #14
+ 8000278:	4611      	mov	r1, r2
+ 800027a:	4618      	mov	r0, r3
+ 800027c:	f7ff ff78 	bl	8000170 <Get_CRLH_Position>
+ 8000280:	4603      	mov	r3, r0
+ 8000282:	75fb      	strb	r3, [r7, #23]
+		vu32ConfigReg = (uddtpinConfig->uddtPinNumber < 8)? (&uddtpinConfig->GPIOx->CRL):(&uddtpinConfig->GPIOx->CRH);
+ 8000284:	687b      	ldr	r3, [r7, #4]
+ 8000286:	791b      	ldrb	r3, [r3, #4]
+ 8000288:	2b07      	cmp	r3, #7
+ 800028a:	d802      	bhi.n	8000292 <MGPIO_uddtInitPin+0x3e>
+ 800028c:	687b      	ldr	r3, [r7, #4]
+ 800028e:	681b      	ldr	r3, [r3, #0]
+ 8000290:	e002      	b.n	8000298 <MGPIO_uddtInitPin+0x44>
+ 8000292:	687b      	ldr	r3, [r7, #4]
+ 8000294:	681b      	ldr	r3, [r3, #0]
+ 8000296:	3304      	adds	r3, #4
+ 8000298:	613b      	str	r3, [r7, #16]
+
+		(*vu32ConfigReg) &= ~(0xF << u8PinPosationVal);
+ 800029a:	693b      	ldr	r3, [r7, #16]
+ 800029c:	681b      	ldr	r3, [r3, #0]
+ 800029e:	7bba      	ldrb	r2, [r7, #14]
+ 80002a0:	4611      	mov	r1, r2
+ 80002a2:	220f      	movs	r2, #15
+ 80002a4:	408a      	lsls	r2, r1
+ 80002a6:	43d2      	mvns	r2, r2
+ 80002a8:	401a      	ands	r2, r3
+ 80002aa:	693b      	ldr	r3, [r7, #16]
+ 80002ac:	601a      	str	r2, [r3, #0]
+
+		switch(uddtpinConfig->uddtPinMode)
+ 80002ae:	687b      	ldr	r3, [r7, #4]
+ 80002b0:	795b      	ldrb	r3, [r3, #5]
+ 80002b2:	2b05      	cmp	r3, #5
+ 80002b4:	d877      	bhi.n	80003a6 <MGPIO_uddtInitPin+0x152>
+ 80002b6:	a201      	add	r2, pc, #4	; (adr r2, 80002bc <MGPIO_uddtInitPin+0x68>)
+ 80002b8:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80002bc:	08000307 	.word	0x08000307
+ 80002c0:	08000307 	.word	0x08000307
+ 80002c4:	08000369 	.word	0x08000369
+ 80002c8:	0800032b 	.word	0x0800032b
+ 80002cc:	080002d5 	.word	0x080002d5
+ 80002d0:	080002d5 	.word	0x080002d5
+		{
+		case MGPIO_OUTPUT_OD_MODE:
+		case MGPIO_OUTPUT_PP_MODE:
+		{
+			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode - 4 ) << 2) | (uddtpinConfig->uddtPinSpeed)) & 0x0F);
+ 80002d4:	687b      	ldr	r3, [r7, #4]
+ 80002d6:	795b      	ldrb	r3, [r3, #5]
+ 80002d8:	3b04      	subs	r3, #4
+ 80002da:	009b      	lsls	r3, r3, #2
+ 80002dc:	b25a      	sxtb	r2, r3
+ 80002de:	687b      	ldr	r3, [r7, #4]
+ 80002e0:	799b      	ldrb	r3, [r3, #6]
+ 80002e2:	b25b      	sxtb	r3, r3
+ 80002e4:	4313      	orrs	r3, r2
+ 80002e6:	b25b      	sxtb	r3, r3
+ 80002e8:	b2db      	uxtb	r3, r3
+ 80002ea:	f003 030f 	and.w	r3, r3, #15
+ 80002ee:	73fb      	strb	r3, [r7, #15]
+			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+ 80002f0:	693b      	ldr	r3, [r7, #16]
+ 80002f2:	681b      	ldr	r3, [r3, #0]
+ 80002f4:	7bfa      	ldrb	r2, [r7, #15]
+ 80002f6:	7bb9      	ldrb	r1, [r7, #14]
+ 80002f8:	408a      	lsls	r2, r1
+ 80002fa:	431a      	orrs	r2, r3
+ 80002fc:	693b      	ldr	r3, [r7, #16]
+ 80002fe:	601a      	str	r2, [r3, #0]
+			ret = UAPI_OK;
+ 8000300:	2301      	movs	r3, #1
+ 8000302:	75fb      	strb	r3, [r7, #23]
+			break;
+ 8000304:	e054      	b.n	80003b0 <MGPIO_uddtInitPin+0x15c>
+		}
+		case MGPIO_ANALOG_MODE:
+		case MGPIO_INPUT_FL_MODE:
+		{
+			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
+ 8000306:	687b      	ldr	r3, [r7, #4]
+ 8000308:	795b      	ldrb	r3, [r3, #5]
+ 800030a:	009b      	lsls	r3, r3, #2
+ 800030c:	b2db      	uxtb	r3, r3
+ 800030e:	f003 030f 	and.w	r3, r3, #15
+ 8000312:	73fb      	strb	r3, [r7, #15]
+			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+ 8000314:	693b      	ldr	r3, [r7, #16]
+ 8000316:	681b      	ldr	r3, [r3, #0]
+ 8000318:	7bfa      	ldrb	r2, [r7, #15]
+ 800031a:	7bb9      	ldrb	r1, [r7, #14]
+ 800031c:	408a      	lsls	r2, r1
+ 800031e:	431a      	orrs	r2, r3
+ 8000320:	693b      	ldr	r3, [r7, #16]
+ 8000322:	601a      	str	r2, [r3, #0]
+			ret = UAPI_OK;
+ 8000324:	2301      	movs	r3, #1
+ 8000326:	75fb      	strb	r3, [r7, #23]
+			break;
+ 8000328:	e042      	b.n	80003b0 <MGPIO_uddtInitPin+0x15c>
+		}
+		case MGPIO_INPUT_PD_MODE:
+		{
+			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
+ 800032a:	687b      	ldr	r3, [r7, #4]
+ 800032c:	795b      	ldrb	r3, [r3, #5]
+ 800032e:	009b      	lsls	r3, r3, #2
+ 8000330:	b2db      	uxtb	r3, r3
+ 8000332:	f003 030f 	and.w	r3, r3, #15
+ 8000336:	73fb      	strb	r3, [r7, #15]
+			SET_BIT(uddtpinConfig->GPIOx->BRR , uddtpinConfig->uddtPinNumber);
+ 8000338:	687b      	ldr	r3, [r7, #4]
+ 800033a:	681b      	ldr	r3, [r3, #0]
+ 800033c:	695a      	ldr	r2, [r3, #20]
+ 800033e:	687b      	ldr	r3, [r7, #4]
+ 8000340:	791b      	ldrb	r3, [r3, #4]
+ 8000342:	4619      	mov	r1, r3
+ 8000344:	2301      	movs	r3, #1
+ 8000346:	408b      	lsls	r3, r1
+ 8000348:	4619      	mov	r1, r3
+ 800034a:	687b      	ldr	r3, [r7, #4]
+ 800034c:	681b      	ldr	r3, [r3, #0]
+ 800034e:	430a      	orrs	r2, r1
+ 8000350:	615a      	str	r2, [r3, #20]
+			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+ 8000352:	693b      	ldr	r3, [r7, #16]
+ 8000354:	681b      	ldr	r3, [r3, #0]
+ 8000356:	7bfa      	ldrb	r2, [r7, #15]
+ 8000358:	7bb9      	ldrb	r1, [r7, #14]
+ 800035a:	408a      	lsls	r2, r1
+ 800035c:	431a      	orrs	r2, r3
+ 800035e:	693b      	ldr	r3, [r7, #16]
+ 8000360:	601a      	str	r2, [r3, #0]
+			ret = UAPI_OK;
+ 8000362:	2301      	movs	r3, #1
+ 8000364:	75fb      	strb	r3, [r7, #23]
+			break;
+ 8000366:	e023      	b.n	80003b0 <MGPIO_uddtInitPin+0x15c>
+		}
+		case MGPIO_INPUT_PU_MODE:
+		{
+			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
+ 8000368:	687b      	ldr	r3, [r7, #4]
+ 800036a:	795b      	ldrb	r3, [r3, #5]
+ 800036c:	009b      	lsls	r3, r3, #2
+ 800036e:	b2db      	uxtb	r3, r3
+ 8000370:	f003 030f 	and.w	r3, r3, #15
+ 8000374:	73fb      	strb	r3, [r7, #15]
+			SET_BIT(uddtpinConfig->GPIOx->BSRR , uddtpinConfig->uddtPinNumber);
+ 8000376:	687b      	ldr	r3, [r7, #4]
+ 8000378:	681b      	ldr	r3, [r3, #0]
+ 800037a:	691a      	ldr	r2, [r3, #16]
+ 800037c:	687b      	ldr	r3, [r7, #4]
+ 800037e:	791b      	ldrb	r3, [r3, #4]
+ 8000380:	4619      	mov	r1, r3
+ 8000382:	2301      	movs	r3, #1
+ 8000384:	408b      	lsls	r3, r1
+ 8000386:	4619      	mov	r1, r3
+ 8000388:	687b      	ldr	r3, [r7, #4]
+ 800038a:	681b      	ldr	r3, [r3, #0]
+ 800038c:	430a      	orrs	r2, r1
+ 800038e:	611a      	str	r2, [r3, #16]
+			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+ 8000390:	693b      	ldr	r3, [r7, #16]
+ 8000392:	681b      	ldr	r3, [r3, #0]
+ 8000394:	7bfa      	ldrb	r2, [r7, #15]
+ 8000396:	7bb9      	ldrb	r1, [r7, #14]
+ 8000398:	408a      	lsls	r2, r1
+ 800039a:	431a      	orrs	r2, r3
+ 800039c:	693b      	ldr	r3, [r7, #16]
+ 800039e:	601a      	str	r2, [r3, #0]
+			ret = UAPI_OK;
+ 80003a0:	2301      	movs	r3, #1
+ 80003a2:	75fb      	strb	r3, [r7, #23]
+			break;
+ 80003a4:	e004      	b.n	80003b0 <MGPIO_uddtInitPin+0x15c>
+		}
+		default : ret = UAPI_INVALID_PARM;
+ 80003a6:	2304      	movs	r3, #4
+ 80003a8:	75fb      	strb	r3, [r7, #23]
+ 80003aa:	e001      	b.n	80003b0 <MGPIO_uddtInitPin+0x15c>
+		}
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+ 80003ac:	2302      	movs	r3, #2
+ 80003ae:	75fb      	strb	r3, [r7, #23]
+	}
+	return ret;
+ 80003b0:	7dfb      	ldrb	r3, [r7, #23]
+}
+ 80003b2:	4618      	mov	r0, r3
+ 80003b4:	3718      	adds	r7, #24
+ 80003b6:	46bd      	mov	sp, r7
+ 80003b8:	bd80      	pop	{r7, pc}
+ 80003ba:	bf00      	nop
+
+080003bc <MGPIO_uddtGetPin>:
+ * @param [in]    : uddtPinNumber : The pin number to retrieve the logic state from.
+ * @param [out]   : uddtRetOfLogic : Pointer to store the logic state of the GPIO pin.
+ * @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
+COMMON_uddtApiState_t MGPIO_uddtGetPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPinNumber_t uddtPinNumber , MGPIO_uddtPinLogic_t *uddtRetOfLogic)
+{
+ 80003bc:	b480      	push	{r7}
+ 80003be:	b087      	sub	sp, #28
+ 80003c0:	af00      	add	r7, sp, #0
+ 80003c2:	60f8      	str	r0, [r7, #12]
+ 80003c4:	460b      	mov	r3, r1
+ 80003c6:	607a      	str	r2, [r7, #4]
+ 80003c8:	72fb      	strb	r3, [r7, #11]
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+ 80003ca:	2300      	movs	r3, #0
+ 80003cc:	75fb      	strb	r3, [r7, #23]
+
+	if((GPIOx != NULL_PTR) && (uddtRetOfLogic != NULL_PTR))
+ 80003ce:	68fb      	ldr	r3, [r7, #12]
+ 80003d0:	2b00      	cmp	r3, #0
+ 80003d2:	d016      	beq.n	8000402 <MGPIO_uddtGetPin+0x46>
+ 80003d4:	687b      	ldr	r3, [r7, #4]
+ 80003d6:	2b00      	cmp	r3, #0
+ 80003d8:	d013      	beq.n	8000402 <MGPIO_uddtGetPin+0x46>
+	{
+		if((uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
+ 80003da:	7afb      	ldrb	r3, [r7, #11]
+ 80003dc:	2b0f      	cmp	r3, #15
+ 80003de:	d80d      	bhi.n	80003fc <MGPIO_uddtGetPin+0x40>
+		{
+			*uddtRetOfLogic = GET_BIT(GPIOx->IDR , uddtPinNumber);
+ 80003e0:	68fb      	ldr	r3, [r7, #12]
+ 80003e2:	689a      	ldr	r2, [r3, #8]
+ 80003e4:	7afb      	ldrb	r3, [r7, #11]
+ 80003e6:	fa22 f303 	lsr.w	r3, r2, r3
+ 80003ea:	b2db      	uxtb	r3, r3
+ 80003ec:	f003 0301 	and.w	r3, r3, #1
+ 80003f0:	b2da      	uxtb	r2, r3
+ 80003f2:	687b      	ldr	r3, [r7, #4]
+ 80003f4:	701a      	strb	r2, [r3, #0]
+			ret = UAPI_OK;
+ 80003f6:	2301      	movs	r3, #1
+ 80003f8:	75fb      	strb	r3, [r7, #23]
+		if((uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
+ 80003fa:	e004      	b.n	8000406 <MGPIO_uddtGetPin+0x4a>
+		}
+		else
+		{
+			ret = UAPI_INVALID_PARM;
+ 80003fc:	2304      	movs	r3, #4
+ 80003fe:	75fb      	strb	r3, [r7, #23]
+		if((uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
+ 8000400:	e001      	b.n	8000406 <MGPIO_uddtGetPin+0x4a>
+		}
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+ 8000402:	2302      	movs	r3, #2
+ 8000404:	75fb      	strb	r3, [r7, #23]
+	}
+	return ret;
+ 8000406:	7dfb      	ldrb	r3, [r7, #23]
+}
+ 8000408:	4618      	mov	r0, r3
+ 800040a:	371c      	adds	r7, #28
+ 800040c:	46bd      	mov	sp, r7
+ 800040e:	bc80      	pop	{r7}
+ 8000410:	4770      	bx	lr
+
+08000412 <MGPIO_uddtTogPin>:
+* @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+* @param [in]    : uddtPinNumber : The pin number to toggle the logic state for.
+* @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+*=============================================================================**/
+COMMON_uddtApiState_t MGPIO_uddtTogPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPinNumber_t uddtPinNumber )
+{
+ 8000412:	b480      	push	{r7}
+ 8000414:	b085      	sub	sp, #20
+ 8000416:	af00      	add	r7, sp, #0
+ 8000418:	6078      	str	r0, [r7, #4]
+ 800041a:	460b      	mov	r3, r1
+ 800041c:	70fb      	strb	r3, [r7, #3]
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+ 800041e:	2300      	movs	r3, #0
+ 8000420:	73fb      	strb	r3, [r7, #15]
+
+	if(GPIOx != NULL_PTR)
+ 8000422:	687b      	ldr	r3, [r7, #4]
+ 8000424:	2b00      	cmp	r3, #0
+ 8000426:	d011      	beq.n	800044c <MGPIO_uddtTogPin+0x3a>
+	{
+		if((uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
+ 8000428:	78fb      	ldrb	r3, [r7, #3]
+ 800042a:	2b0f      	cmp	r3, #15
+ 800042c:	d80b      	bhi.n	8000446 <MGPIO_uddtTogPin+0x34>
+		{
+			TOG_BIT(GPIOx->ODR , uddtPinNumber);
+ 800042e:	687b      	ldr	r3, [r7, #4]
+ 8000430:	68db      	ldr	r3, [r3, #12]
+ 8000432:	78fa      	ldrb	r2, [r7, #3]
+ 8000434:	2101      	movs	r1, #1
+ 8000436:	fa01 f202 	lsl.w	r2, r1, r2
+ 800043a:	405a      	eors	r2, r3
+ 800043c:	687b      	ldr	r3, [r7, #4]
+ 800043e:	60da      	str	r2, [r3, #12]
+			ret = UAPI_OK;
+ 8000440:	2301      	movs	r3, #1
+ 8000442:	73fb      	strb	r3, [r7, #15]
+ 8000444:	e004      	b.n	8000450 <MGPIO_uddtTogPin+0x3e>
+		}
+		else
+		{
+			ret = UAPI_INVALID_PARM;
+ 8000446:	2304      	movs	r3, #4
+ 8000448:	73fb      	strb	r3, [r7, #15]
+ 800044a:	e001      	b.n	8000450 <MGPIO_uddtTogPin+0x3e>
+		}
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+ 800044c:	2302      	movs	r3, #2
+ 800044e:	73fb      	strb	r3, [r7, #15]
+	}
+	return ret;
+ 8000450:	7bfb      	ldrb	r3, [r7, #15]
+}
+ 8000452:	4618      	mov	r0, r3
+ 8000454:	3714      	adds	r7, #20
+ 8000456:	46bd      	mov	sp, r7
+ 8000458:	bc80      	pop	{r7}
+ 800045a:	4770      	bx	lr
+
+0800045c <main>:
+void vCLOCK_init(void);
+void vGPIO_init(void);
+void vWaitMs(uint32 itr);
+GPIO_uddtPinConfig_t  pinCfg;
+int main(void)
+{
+ 800045c:	b580      	push	{r7, lr}
+ 800045e:	b082      	sub	sp, #8
+ 8000460:	af00      	add	r7, sp, #0
+
+	vCLOCK_init();
+ 8000462:	f000 f82f 	bl	80004c4 <vCLOCK_init>
+	vGPIO_init();
+ 8000466:	f000 f841 	bl	80004ec <vGPIO_init>
+	while(1)
+	{
+		MGPIO_uddtPinLogic_t   uddtLogicVal;
+		MGPIO_uddtGetPin(GPIOA,MGPIO_PIN1,&uddtLogicVal);
+ 800046a:	1dfb      	adds	r3, r7, #7
+ 800046c:	461a      	mov	r2, r3
+ 800046e:	2101      	movs	r1, #1
+ 8000470:	4812      	ldr	r0, [pc, #72]	; (80004bc <main+0x60>)
+ 8000472:	f7ff ffa3 	bl	80003bc <MGPIO_uddtGetPin>
+		if(uddtLogicVal == MGPIO_LOGIC_LOW)
+ 8000476:	79fb      	ldrb	r3, [r7, #7]
+ 8000478:	2b00      	cmp	r3, #0
+ 800047a:	d10d      	bne.n	8000498 <main+0x3c>
+		{
+			MGPIO_uddtTogPin(GPIOB,MGPIO_PIN1);
+ 800047c:	2101      	movs	r1, #1
+ 800047e:	4810      	ldr	r0, [pc, #64]	; (80004c0 <main+0x64>)
+ 8000480:	f7ff ffc7 	bl	8000412 <MGPIO_uddtTogPin>
+			while(uddtLogicVal == MGPIO_LOGIC_LOW)
+ 8000484:	e005      	b.n	8000492 <main+0x36>
+			{
+			   MGPIO_uddtGetPin(GPIOA,MGPIO_PIN1,&uddtLogicVal);
+ 8000486:	1dfb      	adds	r3, r7, #7
+ 8000488:	461a      	mov	r2, r3
+ 800048a:	2101      	movs	r1, #1
+ 800048c:	480b      	ldr	r0, [pc, #44]	; (80004bc <main+0x60>)
+ 800048e:	f7ff ff95 	bl	80003bc <MGPIO_uddtGetPin>
+			while(uddtLogicVal == MGPIO_LOGIC_LOW)
+ 8000492:	79fb      	ldrb	r3, [r7, #7]
+ 8000494:	2b00      	cmp	r3, #0
+ 8000496:	d0f6      	beq.n	8000486 <main+0x2a>
+			}
+		}
+
+		MGPIO_uddtGetPin(GPIOA,MGPIO_PIN13,&uddtLogicVal);
+ 8000498:	1dfb      	adds	r3, r7, #7
+ 800049a:	461a      	mov	r2, r3
+ 800049c:	210d      	movs	r1, #13
+ 800049e:	4807      	ldr	r0, [pc, #28]	; (80004bc <main+0x60>)
+ 80004a0:	f7ff ff8c 	bl	80003bc <MGPIO_uddtGetPin>
+		if(uddtLogicVal == MGPIO_LOGIC_HIGH)
+ 80004a4:	79fb      	ldrb	r3, [r7, #7]
+ 80004a6:	2b01      	cmp	r3, #1
+ 80004a8:	d103      	bne.n	80004b2 <main+0x56>
+		{
+			MGPIO_uddtTogPin(GPIOB,MGPIO_PIN13);
+ 80004aa:	210d      	movs	r1, #13
+ 80004ac:	4804      	ldr	r0, [pc, #16]	; (80004c0 <main+0x64>)
+ 80004ae:	f7ff ffb0 	bl	8000412 <MGPIO_uddtTogPin>
+		}
+		vWaitMs(1);
+ 80004b2:	2001      	movs	r0, #1
+ 80004b4:	f000 f85a 	bl	800056c <vWaitMs>
+	{
+ 80004b8:	e7d7      	b.n	800046a <main+0xe>
+ 80004ba:	bf00      	nop
+ 80004bc:	40010800 	.word	0x40010800
+ 80004c0:	40010c00 	.word	0x40010c00
+
+080004c4 <vCLOCK_init>:
+
+	return 0;
+}
+
+void vCLOCK_init(void)
+{
+ 80004c4:	b480      	push	{r7}
+ 80004c6:	af00      	add	r7, sp, #0
+		RCC_GPIOA_CLK_EN();
+ 80004c8:	4b07      	ldr	r3, [pc, #28]	; (80004e8 <vCLOCK_init+0x24>)
+ 80004ca:	699b      	ldr	r3, [r3, #24]
+ 80004cc:	4a06      	ldr	r2, [pc, #24]	; (80004e8 <vCLOCK_init+0x24>)
+ 80004ce:	f043 0304 	orr.w	r3, r3, #4
+ 80004d2:	6193      	str	r3, [r2, #24]
+		RCC_GPIOB_CLK_EN();
+ 80004d4:	4b04      	ldr	r3, [pc, #16]	; (80004e8 <vCLOCK_init+0x24>)
+ 80004d6:	699b      	ldr	r3, [r3, #24]
+ 80004d8:	4a03      	ldr	r2, [pc, #12]	; (80004e8 <vCLOCK_init+0x24>)
+ 80004da:	f043 0308 	orr.w	r3, r3, #8
+ 80004de:	6193      	str	r3, [r2, #24]
+}
+ 80004e0:	bf00      	nop
+ 80004e2:	46bd      	mov	sp, r7
+ 80004e4:	bc80      	pop	{r7}
+ 80004e6:	4770      	bx	lr
+ 80004e8:	40021000 	.word	0x40021000
+
+080004ec <vGPIO_init>:
+
+void vGPIO_init(void)
+{
+ 80004ec:	b580      	push	{r7, lr}
+ 80004ee:	af00      	add	r7, sp, #0
+	pinCfg.GPIOx = GPIOA;
+ 80004f0:	4b1b      	ldr	r3, [pc, #108]	; (8000560 <vGPIO_init+0x74>)
+ 80004f2:	4a1c      	ldr	r2, [pc, #112]	; (8000564 <vGPIO_init+0x78>)
+ 80004f4:	601a      	str	r2, [r3, #0]
+	pinCfg.uddtPinNumber = MGPIO_PIN1;
+ 80004f6:	4b1a      	ldr	r3, [pc, #104]	; (8000560 <vGPIO_init+0x74>)
+ 80004f8:	2201      	movs	r2, #1
+ 80004fa:	711a      	strb	r2, [r3, #4]
+	pinCfg.uddtPinMode = MGPIO_INPUT_FL_MODE;
+ 80004fc:	4b18      	ldr	r3, [pc, #96]	; (8000560 <vGPIO_init+0x74>)
+ 80004fe:	2201      	movs	r2, #1
+ 8000500:	715a      	strb	r2, [r3, #5]
+	MGPIO_uddtInitPin(&pinCfg);
+ 8000502:	4817      	ldr	r0, [pc, #92]	; (8000560 <vGPIO_init+0x74>)
+ 8000504:	f7ff fea6 	bl	8000254 <MGPIO_uddtInitPin>
+
+	pinCfg.GPIOx = GPIOB;
+ 8000508:	4b15      	ldr	r3, [pc, #84]	; (8000560 <vGPIO_init+0x74>)
+ 800050a:	4a17      	ldr	r2, [pc, #92]	; (8000568 <vGPIO_init+0x7c>)
+ 800050c:	601a      	str	r2, [r3, #0]
+	pinCfg.uddtPinNumber = MGPIO_PIN1;
+ 800050e:	4b14      	ldr	r3, [pc, #80]	; (8000560 <vGPIO_init+0x74>)
+ 8000510:	2201      	movs	r2, #1
+ 8000512:	711a      	strb	r2, [r3, #4]
+	pinCfg.uddtPinMode = MGPIO_OUTPUT_PP_MODE;
+ 8000514:	4b12      	ldr	r3, [pc, #72]	; (8000560 <vGPIO_init+0x74>)
+ 8000516:	2204      	movs	r2, #4
+ 8000518:	715a      	strb	r2, [r3, #5]
+	pinCfg.uddtPinSpeed = MGPIO_10MHZ_SPEED;
+ 800051a:	4b11      	ldr	r3, [pc, #68]	; (8000560 <vGPIO_init+0x74>)
+ 800051c:	2201      	movs	r2, #1
+ 800051e:	719a      	strb	r2, [r3, #6]
+	MGPIO_uddtInitPin(&pinCfg);
+ 8000520:	480f      	ldr	r0, [pc, #60]	; (8000560 <vGPIO_init+0x74>)
+ 8000522:	f7ff fe97 	bl	8000254 <MGPIO_uddtInitPin>
+
+	pinCfg.GPIOx = GPIOA;
+ 8000526:	4b0e      	ldr	r3, [pc, #56]	; (8000560 <vGPIO_init+0x74>)
+ 8000528:	4a0e      	ldr	r2, [pc, #56]	; (8000564 <vGPIO_init+0x78>)
+ 800052a:	601a      	str	r2, [r3, #0]
+	pinCfg.uddtPinNumber = MGPIO_PIN13;
+ 800052c:	4b0c      	ldr	r3, [pc, #48]	; (8000560 <vGPIO_init+0x74>)
+ 800052e:	220d      	movs	r2, #13
+ 8000530:	711a      	strb	r2, [r3, #4]
+	pinCfg.uddtPinMode = MGPIO_INPUT_FL_MODE;
+ 8000532:	4b0b      	ldr	r3, [pc, #44]	; (8000560 <vGPIO_init+0x74>)
+ 8000534:	2201      	movs	r2, #1
+ 8000536:	715a      	strb	r2, [r3, #5]
+	MGPIO_uddtInitPin(&pinCfg);
+ 8000538:	4809      	ldr	r0, [pc, #36]	; (8000560 <vGPIO_init+0x74>)
+ 800053a:	f7ff fe8b 	bl	8000254 <MGPIO_uddtInitPin>
+
+	pinCfg.GPIOx = GPIOB;
+ 800053e:	4b08      	ldr	r3, [pc, #32]	; (8000560 <vGPIO_init+0x74>)
+ 8000540:	4a09      	ldr	r2, [pc, #36]	; (8000568 <vGPIO_init+0x7c>)
+ 8000542:	601a      	str	r2, [r3, #0]
+	pinCfg.uddtPinNumber = MGPIO_PIN13;
+ 8000544:	4b06      	ldr	r3, [pc, #24]	; (8000560 <vGPIO_init+0x74>)
+ 8000546:	220d      	movs	r2, #13
+ 8000548:	711a      	strb	r2, [r3, #4]
+	pinCfg.uddtPinMode = MGPIO_OUTPUT_PP_MODE;
+ 800054a:	4b05      	ldr	r3, [pc, #20]	; (8000560 <vGPIO_init+0x74>)
+ 800054c:	2204      	movs	r2, #4
+ 800054e:	715a      	strb	r2, [r3, #5]
+	pinCfg.uddtPinSpeed = MGPIO_10MHZ_SPEED;
+ 8000550:	4b03      	ldr	r3, [pc, #12]	; (8000560 <vGPIO_init+0x74>)
+ 8000552:	2201      	movs	r2, #1
+ 8000554:	719a      	strb	r2, [r3, #6]
+	MGPIO_uddtInitPin(&pinCfg);
+ 8000556:	4802      	ldr	r0, [pc, #8]	; (8000560 <vGPIO_init+0x74>)
+ 8000558:	f7ff fe7c 	bl	8000254 <MGPIO_uddtInitPin>
+
+}
+ 800055c:	bf00      	nop
+ 800055e:	bd80      	pop	{r7, pc}
+ 8000560:	2000001c 	.word	0x2000001c
+ 8000564:	40010800 	.word	0x40010800
+ 8000568:	40010c00 	.word	0x40010c00
+
+0800056c <vWaitMs>:
+
+void vWaitMs(uint32 itr)
+{
+ 800056c:	b480      	push	{r7}
+ 800056e:	b085      	sub	sp, #20
+ 8000570:	af00      	add	r7, sp, #0
+ 8000572:	6078      	str	r0, [r7, #4]
+	uint32 i,j;
+	for(i =0;i<itr;i++)
+ 8000574:	2300      	movs	r3, #0
+ 8000576:	60fb      	str	r3, [r7, #12]
+ 8000578:	e00b      	b.n	8000592 <vWaitMs+0x26>
+	{
+		for(j=0;j<255;j++);
+ 800057a:	2300      	movs	r3, #0
+ 800057c:	60bb      	str	r3, [r7, #8]
+ 800057e:	e002      	b.n	8000586 <vWaitMs+0x1a>
+ 8000580:	68bb      	ldr	r3, [r7, #8]
+ 8000582:	3301      	adds	r3, #1
+ 8000584:	60bb      	str	r3, [r7, #8]
+ 8000586:	68bb      	ldr	r3, [r7, #8]
+ 8000588:	2bfe      	cmp	r3, #254	; 0xfe
+ 800058a:	d9f9      	bls.n	8000580 <vWaitMs+0x14>
+	for(i =0;i<itr;i++)
+ 800058c:	68fb      	ldr	r3, [r7, #12]
+ 800058e:	3301      	adds	r3, #1
+ 8000590:	60fb      	str	r3, [r7, #12]
+ 8000592:	68fa      	ldr	r2, [r7, #12]
+ 8000594:	687b      	ldr	r3, [r7, #4]
+ 8000596:	429a      	cmp	r2, r3
+ 8000598:	d3ef      	bcc.n	800057a <vWaitMs+0xe>
+	}
+}
+ 800059a:	bf00      	nop
+ 800059c:	bf00      	nop
+ 800059e:	3714      	adds	r7, #20
+ 80005a0:	46bd      	mov	sp, r7
+ 80005a2:	bc80      	pop	{r7}
+ 80005a4:	4770      	bx	lr
+	...
+
+080005a8 <Reset_Handler>:
+
+  .section .text.Reset_Handler
+  .weak Reset_Handler
+  .type Reset_Handler, %function
+Reset_Handler:
+  ldr   r0, =_estack
+ 80005a8:	480d      	ldr	r0, [pc, #52]	; (80005e0 <LoopForever+0x2>)
+  mov   sp, r0          /* set stack pointer */
+ 80005aa:	4685      	mov	sp, r0
+/* Call the clock system initialization function.*/
+  bl  SystemInit
+ 80005ac:	f3af 8000 	nop.w
+
+/* Copy the data segment initializers from flash to SRAM */
+  ldr r0, =_sdata
+ 80005b0:	480c      	ldr	r0, [pc, #48]	; (80005e4 <LoopForever+0x6>)
+  ldr r1, =_edata
+ 80005b2:	490d      	ldr	r1, [pc, #52]	; (80005e8 <LoopForever+0xa>)
+  ldr r2, =_sidata
+ 80005b4:	4a0d      	ldr	r2, [pc, #52]	; (80005ec <LoopForever+0xe>)
+  movs r3, #0
+ 80005b6:	2300      	movs	r3, #0
+  b LoopCopyDataInit
+ 80005b8:	e002      	b.n	80005c0 <LoopCopyDataInit>
+
+080005ba <CopyDataInit>:
+
+CopyDataInit:
+  ldr r4, [r2, r3]
+ 80005ba:	58d4      	ldr	r4, [r2, r3]
+  str r4, [r0, r3]
+ 80005bc:	50c4      	str	r4, [r0, r3]
+  adds r3, r3, #4
+ 80005be:	3304      	adds	r3, #4
+
+080005c0 <LoopCopyDataInit>:
+
+LoopCopyDataInit:
+  adds r4, r0, r3
+ 80005c0:	18c4      	adds	r4, r0, r3
+  cmp r4, r1
+ 80005c2:	428c      	cmp	r4, r1
+  bcc CopyDataInit
+ 80005c4:	d3f9      	bcc.n	80005ba <CopyDataInit>
+
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
+ 80005c6:	4a0a      	ldr	r2, [pc, #40]	; (80005f0 <LoopForever+0x12>)
+  ldr r4, =_ebss
+ 80005c8:	4c0a      	ldr	r4, [pc, #40]	; (80005f4 <LoopForever+0x16>)
+  movs r3, #0
+ 80005ca:	2300      	movs	r3, #0
+  b LoopFillZerobss
+ 80005cc:	e001      	b.n	80005d2 <LoopFillZerobss>
+
+080005ce <FillZerobss>:
+
+FillZerobss:
+  str  r3, [r2]
+ 80005ce:	6013      	str	r3, [r2, #0]
+  adds r2, r2, #4
+ 80005d0:	3204      	adds	r2, #4
+
+080005d2 <LoopFillZerobss>:
+
+LoopFillZerobss:
+  cmp r2, r4
+ 80005d2:	42a2      	cmp	r2, r4
+  bcc FillZerobss
+ 80005d4:	d3fb      	bcc.n	80005ce <FillZerobss>
+
+/* Call static constructors */
+  bl __libc_init_array
+ 80005d6:	f000 f811 	bl	80005fc <__libc_init_array>
+/* Call the application's entry point.*/
+  bl main
+ 80005da:	f7ff ff3f 	bl	800045c <main>
+
+080005de <LoopForever>:
+
+LoopForever:
+  b LoopForever
+ 80005de:	e7fe      	b.n	80005de <LoopForever>
+  ldr   r0, =_estack
+ 80005e0:	20002800 	.word	0x20002800
+  ldr r0, =_sdata
+ 80005e4:	20000000 	.word	0x20000000
+  ldr r1, =_edata
+ 80005e8:	20000000 	.word	0x20000000
+  ldr r2, =_sidata
+ 80005ec:	08000664 	.word	0x08000664
+  ldr r2, =_sbss
+ 80005f0:	20000000 	.word	0x20000000
+  ldr r4, =_ebss
+ 80005f4:	20000024 	.word	0x20000024
+
+080005f8 <ADC1_2_IRQHandler>:
+ * @retval : None
+*/
+  .section .text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+  b Infinite_Loop
+ 80005f8:	e7fe      	b.n	80005f8 <ADC1_2_IRQHandler>
+	...
+
+080005fc <__libc_init_array>:
+ 80005fc:	b570      	push	{r4, r5, r6, lr}
+ 80005fe:	2600      	movs	r6, #0
+ 8000600:	4d0c      	ldr	r5, [pc, #48]	; (8000634 <__libc_init_array+0x38>)
+ 8000602:	4c0d      	ldr	r4, [pc, #52]	; (8000638 <__libc_init_array+0x3c>)
+ 8000604:	1b64      	subs	r4, r4, r5
+ 8000606:	10a4      	asrs	r4, r4, #2
+ 8000608:	42a6      	cmp	r6, r4
+ 800060a:	d109      	bne.n	8000620 <__libc_init_array+0x24>
+ 800060c:	f000 f81a 	bl	8000644 <_init>
+ 8000610:	2600      	movs	r6, #0
+ 8000612:	4d0a      	ldr	r5, [pc, #40]	; (800063c <__libc_init_array+0x40>)
+ 8000614:	4c0a      	ldr	r4, [pc, #40]	; (8000640 <__libc_init_array+0x44>)
+ 8000616:	1b64      	subs	r4, r4, r5
+ 8000618:	10a4      	asrs	r4, r4, #2
+ 800061a:	42a6      	cmp	r6, r4
+ 800061c:	d105      	bne.n	800062a <__libc_init_array+0x2e>
+ 800061e:	bd70      	pop	{r4, r5, r6, pc}
+ 8000620:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8000624:	4798      	blx	r3
+ 8000626:	3601      	adds	r6, #1
+ 8000628:	e7ee      	b.n	8000608 <__libc_init_array+0xc>
+ 800062a:	f855 3b04 	ldr.w	r3, [r5], #4
+ 800062e:	4798      	blx	r3
+ 8000630:	3601      	adds	r6, #1
+ 8000632:	e7f2      	b.n	800061a <__libc_init_array+0x1e>
+ 8000634:	0800065c 	.word	0x0800065c
+ 8000638:	0800065c 	.word	0x0800065c
+ 800063c:	0800065c 	.word	0x0800065c
+ 8000640:	08000660 	.word	0x08000660
+
+08000644 <_init>:
+ 8000644:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000646:	bf00      	nop
+ 8000648:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800064a:	bc08      	pop	{r3}
+ 800064c:	469e      	mov	lr, r3
+ 800064e:	4770      	bx	lr
+
+08000650 <_fini>:
+ 8000650:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8000652:	bf00      	nop
+ 8000654:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000656:	bc08      	pop	{r3}
+ 8000658:	469e      	mov	lr, r3
+ 800065a:	4770      	bx	lr
