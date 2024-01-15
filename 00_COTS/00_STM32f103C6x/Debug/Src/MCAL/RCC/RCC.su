@@ -1,0 +1,9 @@
+../Src/MCAL/RCC/RCC.c:18:16:MRCC_u32GetPrescalerVal	16	static
+../Src/MCAL/RCC/RCC.c:67:23:MRCC_uddtInitClk	24	static
+../Src/MCAL/RCC/RCC.c:130:23:MRCC_uddtInitPll	24	static
+../Src/MCAL/RCC/RCC.c:210:23:MRCC_uddtEnablePeripheral	24	static
+../Src/MCAL/RCC/RCC.c:281:23:MRCC_uddtResetPeripheral	24	static
+../Src/MCAL/RCC/RCC.c:345:23:MRCC_uddtGetSysFreq	24	static
+../Src/MCAL/RCC/RCC.c:403:23:MRCC_uddtGetAhbFreq	32	static
+../Src/MCAL/RCC/RCC.c:428:23:MRCC_uddtGetAbp1Freq	32	static
+../Src/MCAL/RCC/RCC.c:453:23:MRCC_uddtGetAbp2Freq	32	static

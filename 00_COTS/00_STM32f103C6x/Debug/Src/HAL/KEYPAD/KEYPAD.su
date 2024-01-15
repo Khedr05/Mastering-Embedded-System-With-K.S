@@ -1,0 +1,2 @@
+../Src/HAL/KEYPAD/KEYPAD.c:19:23:HKP_uddtInit	32	static
+../Src/HAL/KEYPAD/KEYPAD.c:56:23:HKP_uddtGetPressedBtn	24	static

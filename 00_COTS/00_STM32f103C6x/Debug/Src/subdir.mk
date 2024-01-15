@@ -22,7 +22,7 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C6Tx -c -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/UTILS" -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/MCAL/GPIO" -O0 -ffunction-sections -fdata-sections -Wall -gdwarf-2 -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C6Tx -c -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/UTILS" -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/MCAL/RCC" -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/HAL/KEYPAD" -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/HAL/LCD" -I"D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/Stm32f103c6x_Drivers/Inc/MCAL/GPIO" -O0 -ffunction-sections -fdata-sections -Wall -gdwarf-2 -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 
 clean: clean-Src
 

@@ -22,6 +22,9 @@ typedef enum
 	MGPIO_INPUT_PD_MODE,
 	MGPIO_OUTPUT_PP_MODE,
 	MGPIO_OUTPUT_OD_MODE,
+	MGPIO_OUTPUT_AF_PP_MODE,
+	MGPIO_OUTPUT_AF_OD_MODE,
+	MGPIO_INPUT_AF_MODE
 }MGPIO_uddtPinMode_t;
 
 /*@ref Pin Number*/
@@ -79,6 +82,7 @@ typedef struct
 	MGPIO_uddtPinNumber_t uddtPinNumber; /*@ref Pin Number*/
 	MGPIO_uddtPinMode_t   uddtPinMode;   /*@ref Pin Modes*/
 	MGPIO_uddtPinSpeed_t  uddtPinSpeed;  /*@ref Pin Speed*/
+	MGPIO_uddtPinLogic_t  uddtPinLogic;  /*@ref Pin Logic*/
 }GPIO_uddtPinConfig_t;
 
 /*__________________________________________________________________________________________*/
@@ -166,6 +170,8 @@ COMMON_uddtApiState_t MGPIO_uddtIsPinLock(GPIO_registerMap_t  *GPIOx , MGPIO_udd
 COMMON_uddtApiState_t MGPIO_uddtGetPort(GPIO_registerMap_t  *GPIOx , uint16 *u16RetOfLogic);
 COMMON_uddtApiState_t MGPIO_uddtSetPort(GPIO_registerMap_t  *GPIOx, uint16  u16ValOfLogic);
 COMMON_uddtApiState_t MGPIO_uddtResetPort(GPIO_registerMap_t  *GPIOx);
+COMMON_uddtApiState_t MGPIO_uddtSetLeast8Pins(GPIO_registerMap_t *GPIOx, uint8 u8ValOfLogic);
+COMMON_uddtApiState_t MGPIO_uddtSetMost8Pins(GPIO_registerMap_t *GPIOx, uint8 u8ValOfLogic);
 
 /*________________________________________________________________________________________*/
 

@@ -73,6 +73,13 @@ typedef enum {
 #define NULL_PTR	(void*)0
 #endif
 
+// Delay Lib
+
+#define F_CPU		8000000UL
+
+void Udelay_ms(uint16 milliseconds);
+
+
 // API Error States
 
 /*@ref API Error States*/

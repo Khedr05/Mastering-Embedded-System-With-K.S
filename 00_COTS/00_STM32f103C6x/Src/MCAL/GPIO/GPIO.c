@@ -24,52 +24,48 @@ COMMON_uddtApiState_t Get_CRLH_Position(MGPIO_uddtPinNumber_t uddtPinNumber ,uin
 	COMMON_uddtApiState_t ret = UAPI_NOK;
 	if(u8RetOfPosition != NULL_PTR)
 	{
-		if( (uddtPinNumber >= MGPIO_PIN0) && (uddtPinNumber <= MGPIO_PIN15))
-		{
-			switch(uddtPinNumber){
-			case MGPIO_PIN0:
-			case MGPIO_PIN8:
-				*u8RetOfPosition = 0;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN1:
-			case MGPIO_PIN9:
-				*u8RetOfPosition = 4;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN2:
-			case MGPIO_PIN10:
-				*u8RetOfPosition = 8;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN3:
-			case MGPIO_PIN11:
-				*u8RetOfPosition = 12;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN4:
-			case MGPIO_PIN12:
-				*u8RetOfPosition = 16;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN5:
-			case MGPIO_PIN13:
-				*u8RetOfPosition = 20;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN6:
-			case MGPIO_PIN14:
-				*u8RetOfPosition = 24;
-				ret = UAPI_OK;
-				break;
-			case MGPIO_PIN7:
-			case MGPIO_PIN15:
-				*u8RetOfPosition = 28;
-				ret = UAPI_OK;
-				break;
-			default: ret = UAPI_INVALID_PARM;
-			}
-			ret = UAPI_INVALID_PARM;
+		switch(uddtPinNumber){
+		case MGPIO_PIN0:
+		case MGPIO_PIN8:
+			*u8RetOfPosition = 0;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN1:
+		case MGPIO_PIN9:
+			*u8RetOfPosition = 4;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN2:
+		case MGPIO_PIN10:
+			*u8RetOfPosition = 8;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN3:
+		case MGPIO_PIN11:
+			*u8RetOfPosition = 12;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN4:
+		case MGPIO_PIN12:
+			*u8RetOfPosition = 16;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN5:
+		case MGPIO_PIN13:
+			*u8RetOfPosition = 20;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN6:
+		case MGPIO_PIN14:
+			*u8RetOfPosition = 24;
+			ret = UAPI_OK;
+			break;
+		case MGPIO_PIN7:
+		case MGPIO_PIN15:
+			*u8RetOfPosition = 28;
+			ret = UAPI_OK;
+			break;
+		default: ret = UAPI_INVALID_PARM;
 		}
 	}
 	else
@@ -105,34 +101,41 @@ COMMON_uddtApiState_t MGPIO_uddtInitPin(GPIO_uddtPinConfig_t *uddtpinConfig)
 		{
 		case MGPIO_OUTPUT_OD_MODE:
 		case MGPIO_OUTPUT_PP_MODE:
+		case MGPIO_OUTPUT_AF_PP_MODE:
+		case MGPIO_OUTPUT_AF_OD_MODE:
 		{
 			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode - 4 ) << 2) | (uddtpinConfig->uddtPinSpeed)) & 0x0F);
 			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
-			ret = UAPI_OK;
+			ret = MGPIO_uddtSetPin(uddtpinConfig->GPIOx,uddtpinConfig->uddtPinNumber,uddtpinConfig->uddtPinLogic);
 			break;
 		}
 		case MGPIO_ANALOG_MODE:
 		case MGPIO_INPUT_FL_MODE:
 		{
-			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
+			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x00))& 0x0F);
 			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
-			ret = UAPI_OK;
+			ret = MGPIO_uddtSetPin(uddtpinConfig->GPIOx,uddtpinConfig->uddtPinNumber,uddtpinConfig->uddtPinLogic);
 			break;
 		}
 		case MGPIO_INPUT_PD_MODE:
 		{
-			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
-			SET_BIT(uddtpinConfig->GPIOx->BRR , uddtpinConfig->uddtPinNumber);
-			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+			(*vu32ConfigReg) |= ((0x08) << u8PinPosationVal);
+			CLR_BIT(uddtpinConfig->GPIOx->ODR , uddtpinConfig->uddtPinNumber);
 			ret = UAPI_OK;
 			break;
 		}
 		case MGPIO_INPUT_PU_MODE:
 		{
-			u8PinConfigVal = ((((uddtpinConfig->uddtPinMode ) << 2) | (0x0)) & 0x0F);
-			SET_BIT(uddtpinConfig->GPIOx->BSRR , uddtpinConfig->uddtPinNumber);
-			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+			(*vu32ConfigReg) |= ((0x08) << u8PinPosationVal);
+			SET_BIT(uddtpinConfig->GPIOx->ODR , uddtpinConfig->uddtPinNumber);
 			ret = UAPI_OK;
+			break;
+		}
+		case MGPIO_INPUT_AF_MODE:
+		{
+			u8PinConfigVal = ((((MGPIO_INPUT_FL_MODE) << 2) | (0x00))& 0x0F);
+			(*vu32ConfigReg) |= ((u8PinConfigVal) << u8PinPosationVal);
+			ret = MGPIO_uddtSetPin(uddtpinConfig->GPIOx,uddtpinConfig->uddtPinNumber,uddtpinConfig->uddtPinLogic);
 			break;
 		}
 		default : ret = UAPI_INVALID_PARM;
@@ -194,12 +197,12 @@ COMMON_uddtApiState_t MGPIO_uddtSetPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPi
 		{
 			if(uddtValOfLogic == MGPIO_LOGIC_HIGH)
 			{
-				SET_BIT(GPIOx->BSRR,uddtPinNumber);
+				SET_BIT(GPIOx->ODR,uddtPinNumber);
 				ret = UAPI_OK;
 			}
 			else if(uddtValOfLogic == MGPIO_LOGIC_LOW)
 			{
-				SET_BIT(GPIOx->BRR,uddtPinNumber);
+				CLR_BIT(GPIOx->ODR,uddtPinNumber);
 				ret = UAPI_OK;
 			}
 			else
@@ -220,11 +223,11 @@ COMMON_uddtApiState_t MGPIO_uddtSetPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPi
 }
 
 /**=============================================================================
-* @brief         : Toggles the logic state of a specific GPIO pin.
-* @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
-* @param [in]    : uddtPinNumber : The pin number to toggle the logic state for.
-* @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
-*=============================================================================**/
+ * @brief         : Toggles the logic state of a specific GPIO pin.
+ * @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+ * @param [in]    : uddtPinNumber : The pin number to toggle the logic state for.
+ * @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
 COMMON_uddtApiState_t MGPIO_uddtTogPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPinNumber_t uddtPinNumber )
 {
 	COMMON_uddtApiState_t ret = UAPI_NOK;
@@ -249,11 +252,11 @@ COMMON_uddtApiState_t MGPIO_uddtTogPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPi
 }
 
 /**=============================================================================
-* @brief         : Locks the configuration of a specific GPIO pin.
-* @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
-* @param [in]    : uddtPinNumber : The pin number to lock the configuration for.
-* @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
-*=============================================================================**/
+ * @brief         : Locks the configuration of a specific GPIO pin.
+ * @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+ * @param [in]    : uddtPinNumber : The pin number to lock the configuration for.
+ * @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
 COMMON_uddtApiState_t MGPIO_uddtLockPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPinNumber_t uddtPinNumber)
 {
 	COMMON_uddtApiState_t ret = UAPI_NOK;
@@ -291,12 +294,12 @@ COMMON_uddtApiState_t MGPIO_uddtLockPin(GPIO_registerMap_t  *GPIOx , MGPIO_uddtP
 }
 
 /**=============================================================================
-* @brief         : Checks if the configuration of a specific GPIO pin is locked.
-* @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
-* @param [in]    : uddtPinNumber : The pin number to check for lock status.
-* @param [out]   : uddtRetOfLock : Pointer to store the lock status of the GPIO pin.
-* @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
-*=============================================================================**/
+ * @brief         : Checks if the configuration of a specific GPIO pin is locked.
+ * @param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+ * @param [in]    : uddtPinNumber : The pin number to check for lock status.
+ * @param [out]   : uddtRetOfLock : Pointer to store the lock status of the GPIO pin.
+ * @return        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
 COMMON_uddtApiState_t MGPIO_uddtIsPinLock(GPIO_registerMap_t  *GPIOx , MGPIO_uddtPinNumber_t uddtPinNumber , MGPIO_uddtPinLock_t *uddtRetOfLock)
 {
 	COMMON_uddtApiState_t ret = UAPI_NOK;
@@ -347,7 +350,7 @@ COMMON_uddtApiState_t MGPIO_uddtGetPort(GPIO_registerMap_t *GPIOx, uint16 *u16Re
 
 	if( (GPIOx != NULL_PTR) && (u16RetOfLogic != NULL_PTR))
 	{
-		*u16RetOfLogic = (uint16)GPIOx->ODR ;
+		*u16RetOfLogic = (uint16)GPIOx->IDR ;
 		ret = UAPI_OK;
 	}
 	else
@@ -392,6 +395,56 @@ COMMON_uddtApiState_t MGPIO_uddtResetPort(GPIO_registerMap_t *GPIOx)
 	if( (GPIOx != NULL_PTR))
 	{
 
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+	}
+	return ret;
+}
+
+/**=============================================================================
+ * @Function Name : MGPIO_uddtSetLeast8Pins
+ * @Brief         : Sets the logic state of the least significant 8 pins of a GPIO port.
+ * @Param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+ * @Param [in]    : u8ValOfLogic : Desired logic state to set for the least significant 8 pins.
+ * @Retval        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
+
+COMMON_uddtApiState_t MGPIO_uddtSetLeast8Pins(GPIO_registerMap_t *GPIOx, uint8 u8ValOfLogic)
+{
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+
+	if (GPIOx != NULL_PTR)
+	{
+		// Clear the least significant 8 bits and set them with the new value
+		GPIOx->ODR = (GPIOx->ODR & 0xFF00) | (uint32)u8ValOfLogic;
+		ret = UAPI_OK;
+	}
+	else
+	{
+		ret = UAPI_NULL_PTR;
+	}
+	return ret;
+}
+
+/**=============================================================================
+ * @Function Name : MGPIO_uddtSetMost8Pins
+ * @Brief         : Sets the logic state of the most significant 8 pins of a GPIO port.
+ * @Param [in]    : GPIOx : Pointer to the GPIO register map for the target port.
+ * @Param [in]    : u8ValOfLogic : Desired logic state to set for the most significant 8 pins.
+ * @Retval        : COMMON_uddtApiState_t : Returns the state of the API (see common files for details).
+ *=============================================================================**/
+
+COMMON_uddtApiState_t MGPIO_uddtSetMost8Pins(GPIO_registerMap_t *GPIOx, uint8 u8ValOfLogic)
+{
+	COMMON_uddtApiState_t ret = UAPI_NOK;
+
+	if (GPIOx != NULL_PTR)
+	{
+		// Clear the most significant 8 bits and set them with the new value
+		GPIOx->ODR = (GPIOx->ODR & 0x00FF) | ((uint32)u8ValOfLogic << 8);
+		ret = UAPI_OK;
 	}
 	else
 	{

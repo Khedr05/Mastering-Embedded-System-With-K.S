@@ -1,0 +1,9 @@
+../Src/HAL/LCD/LCD.c:46:23:HLCD_uddtInit	32	static
+../Src/HAL/LCD/LCD.c:121:23:HLCD_uddtSendCmd	24	static
+../Src/HAL/LCD/LCD.c:173:23:HLCD_uddtDisplayChar	24	static
+../Src/HAL/LCD/LCD.c:224:23:HLCD_uddtDisplayString	24	static
+../Src/HAL/LCD/LCD.c:264:23:HLCD_uddtDisplayNumber	40	static
+../Src/HAL/LCD/LCD.c:301:23:HLCD_uddtChangeCursorPosition	24	static
+../Src/HAL/LCD/LCD.c:339:23:HLCD_uddtShiftDisplay	24	static
+../Src/HAL/LCD/LCD.c:384:23:HLCD_uddtCreateNewCustomChar	32	static
+../Src/HAL/LCD/LCD.c:433:23:HLCD_uddtClr	24	static

@@ -1,0 +1,9 @@
+../Src/HAL/LCD/LCD.c:46:23:HLCD_uddtInit	12
+../Src/HAL/LCD/LCD.c:121:23:HLCD_uddtSendCmd	9
+../Src/HAL/LCD/LCD.c:173:23:HLCD_uddtDisplayChar	9
+../Src/HAL/LCD/LCD.c:224:23:HLCD_uddtDisplayString	7
+../Src/HAL/LCD/LCD.c:264:23:HLCD_uddtDisplayNumber	4
+../Src/HAL/LCD/LCD.c:301:23:HLCD_uddtChangeCursorPosition	8
+../Src/HAL/LCD/LCD.c:339:23:HLCD_uddtShiftDisplay	7
+../Src/HAL/LCD/LCD.c:384:23:HLCD_uddtCreateNewCustomChar	9
+../Src/HAL/LCD/LCD.c:433:23:HLCD_uddtClr	2

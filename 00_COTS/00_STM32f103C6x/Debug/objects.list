@@ -1,4 +1,8 @@
+"./Src/HAL/KEYPAD/KEYPAD.o"
+"./Src/HAL/LCD/LCD.o"
 "./Src/MCAL/GPIO/GPIO.o"
+"./Src/MCAL/RCC/RCC.o"
+"./Src/UTILS/common.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
