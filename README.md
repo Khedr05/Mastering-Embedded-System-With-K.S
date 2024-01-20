@@ -7,7 +7,7 @@
 
 ## 📚 Contents
 
-### First Term ![image](https://progress-bar.dev/100/?title=InProgress)
+### First Term ![image](https://progress-bar.dev/100/?title=Finished)
 
 - [**00_Unit1_Diploma_Prerequisites**](https://github.com/sherifkhadr/Mastering-Embedded-System-With-K.S)
  ![image](https://progress-bar.dev/100/)
@@ -15,6 +15,7 @@
 - [**02_Unit3_Embedded_C**](02_Unit3_Embedded_C) ![image](https://progress-bar.dev/100/)
 - [**03_Unit4_System_Architect**](03_Unit4_System_Architect) ![image](https://progress-bar.dev/100/)
 - [**04_Unit5_First_Term_Projects**](04_Unit5_First_Term_Projects) ![image](https://progress-bar.dev/100/)
+### Second Term ![image](https://progress-bar.dev/30/?title=InProgress)
 - [**05_Unit6_MCU_Fundamentals**](05_Unit6_MCU_Fundamentals) ![image](https://progress-bar.dev/100/)
 - [**06_Unit7_MCU_Essential_Peripherals**](06_Unit7_MCU_Essential_Peripherals) ![image](https://progress-bar.dev/100/)
 
