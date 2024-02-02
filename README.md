@@ -18,6 +18,7 @@
 ### Second Term ![image](https://progress-bar.dev/30/?title=InProgress)
 - [**05_Unit6_MCU_Fundamentals**](05_Unit6_MCU_Fundamentals) ![image](https://progress-bar.dev/100/)
 - [**06_Unit7_MCU_Essential_Peripherals**](06_Unit7_MCU_Essential_Peripherals) ![image](https://progress-bar.dev/100/)
+- [**07_Unit8_MCU_Interfacing**](07_Unit8_MCU_Interfacing) ![image](https://progress-bar.dev/100/)
 
 
 ---
