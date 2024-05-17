@@ -1,0 +1,34 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+  msTimer sendTimer ;
+  const int sendTimerPeriod = 100;
+  message ACC_CMD_Message AccCmd;
+  int VarAcc = 0;
+}
+
+on start
+{
+  write("Case Study 4 : Learn In Depth");
+  setTimer(sendTimer,sendTimerPeriod);
+}
+
+on message SpeedValMessage
+{
+ write("ECU1 : recieved from ECU2"); 
+}
+
+on timer sendTimer
+{
+  // VarAcc ^= 1;
+  write("Case Study 4 : Learn In Depth");
+  VarAcc = @sysvar::ACC_System_VAL;
+  AccCmd.ACC_ON.phys = VarAcc;
+  output(AccCmd);
+  setTimer(sendTimer,sendTimerPeriod);
+}

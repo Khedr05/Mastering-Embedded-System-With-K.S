@@ -1,0 +1,43 @@
+﻿/*@!Encoding:65001*/
+
+includes
+{
+
+}
+
+variables
+{
+  int speedVal = 0;
+  int accCmdVal = 0;
+  message SpeedValMessage speedMsg;
+}
+
+on start
+{
+  write("________________________ Start ECU 2 _______________________________");
+}
+
+on message ACC_CMD_Message
+{
+    write("________________________ Engine ACC CMD Is Call _______________________________");
+  if(this.ACC_ON.phys == 1)
+  {
+    if(speedVal == 255)
+      speedVal = 255;
+    else
+    speedVal++ ;
+  }
+  else
+  {
+      if(this.ACC_ON.phys == 0)
+        {
+          if(speedVal == 0)
+            speedVal = 0;
+          else
+          speedVal-- ;
+        }
+  }
+  
+  speedMsg.Speed.phys = speedVal;
+  output(speedMsg);
+}
