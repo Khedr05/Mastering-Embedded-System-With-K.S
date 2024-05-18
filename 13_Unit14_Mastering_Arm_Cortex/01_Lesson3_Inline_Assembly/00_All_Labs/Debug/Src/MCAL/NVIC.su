@@ -1,0 +1,8 @@
+../Src/MCAL/NVIC.c:18:23:MNVIC_uddtEnableIRQ	24	static
+../Src/MCAL/NVIC.c:39:23:MNVIC_uddtDisableIRQ	24	static
+../Src/MCAL/NVIC.c:61:23:MNVIC_uddtGetPendingIRQ	24	static
+../Src/MCAL/NVIC.c:89:23:MNVIC_uddtSetPendingIRQ	24	static
+../Src/MCAL/NVIC.c:111:23:MNVIC_uddtResetPendingIRQ	24	static
+../Src/MCAL/NVIC.c:134:23:MNVIC_uddtIsActiveIRQ	24	static
+../Src/MCAL/NVIC.c:165:23:MNVIC_uddtSetIRQPriority	24	static
+../Src/MCAL/NVIC.c:204:23:MNVIC_uddtSetIRQGroup	24	static
