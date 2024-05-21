@@ -1,0 +1,13 @@
+../Src/MCAL/EXTI.c:19:24:MEXTI_uddtUpdate	32	static
+../Src/MCAL/EXTI.c:82:25:MEXTI_uddtInit	24	static
+../Src/MCAL/EXTI.c:97:24:MEXTI_uddtSwInterrupt	24	static
+../Src/MCAL/EXTI.c:112:24:MEXTI_uddtMaskLine	24	static
+../Src/MCAL/EXTI.c:127:24:MEXTI_uddtUnmaskLine	24	static
+../Src/MCAL/EXTI.c:142:24:MEXTI_uddtReset	16	static
+../Src/MCAL/EXTI.c:165:6:EXTI0_IRQHandler	8	static
+../Src/MCAL/EXTI.c:171:6:EXTI1_IRQHandler	8	static
+../Src/MCAL/EXTI.c:177:6:EXTI2_IRQHandler	8	static
+../Src/MCAL/EXTI.c:183:6:EXTI3_IRQHandler	8	static
+../Src/MCAL/EXTI.c:189:6:EXTI4_IRQHandler	8	static
+../Src/MCAL/EXTI.c:195:6:EXTI9_5_IRQHandler	8	static
+../Src/MCAL/EXTI.c:204:6:EXTI15_10_IRQHandler	8	static
