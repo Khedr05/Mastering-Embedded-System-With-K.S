@@ -1,0 +1,8 @@
+../Src/MCAL/RCC.c:27:23:MRCC_uddtInitClk	12
+../Src/MCAL/RCC.c:90:23:MRCC_uddtInitPll	19
+../Src/MCAL/RCC.c:170:23:MRCC_uddtEnablePeripheral	50
+../Src/MCAL/RCC.c:241:23:MRCC_uddtResetPeripheral	44
+../Src/MCAL/RCC.c:305:23:MRCC_uddtGetSysFreq	8
+../Src/MCAL/RCC.c:363:23:MRCC_uddtGetAhbFreq	2
+../Src/MCAL/RCC.c:386:23:MRCC_uddtGetAbp1Freq	2
+../Src/MCAL/RCC.c:409:23:MRCC_uddtGetAbp2Freq	2

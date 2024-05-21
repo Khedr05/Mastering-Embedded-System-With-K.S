@@ -1,0 +1,12 @@
+../Src/MCAL/GPIO.c:22:23:Get_CRLH_Position	10
+../Src/MCAL/GPIO.c:85:23:MGPIO_uddtInitPin	8
+../Src/MCAL/GPIO.c:159:23:MGPIO_uddtGetPin	4
+../Src/MCAL/GPIO.c:189:23:MGPIO_uddtSetPin	6
+../Src/MCAL/GPIO.c:231:23:MGPIO_uddtTogPin	3
+../Src/MCAL/GPIO.c:260:23:MGPIO_uddtLockPin	4
+../Src/MCAL/GPIO.c:303:23:MGPIO_uddtIsPinLock	6
+../Src/MCAL/GPIO.c:347:23:MGPIO_uddtGetPort	3
+../Src/MCAL/GPIO.c:369:23:MGPIO_uddtSetPort	2
+../Src/MCAL/GPIO.c:391:23:MGPIO_uddtResetPort	2
+../Src/MCAL/GPIO.c:414:23:MGPIO_uddtSetLeast8Pins	2
+../Src/MCAL/GPIO.c:439:23:MGPIO_uddtSetMost8Pins	2
