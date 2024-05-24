@@ -1,0 +1,8 @@
+../Src/MCAL/NVIC.c:18:23:MNVIC_uddtEnableIRQ	2
+../Src/MCAL/NVIC.c:39:23:MNVIC_uddtDisableIRQ	2
+../Src/MCAL/NVIC.c:61:23:MNVIC_uddtGetPendingIRQ	3
+../Src/MCAL/NVIC.c:89:23:MNVIC_uddtSetPendingIRQ	2
+../Src/MCAL/NVIC.c:111:23:MNVIC_uddtResetPendingIRQ	2
+../Src/MCAL/NVIC.c:134:23:MNVIC_uddtIsActiveIRQ	3
+../Src/MCAL/NVIC.c:165:23:MNVIC_uddtSetIRQPriority	8
+../Src/MCAL/NVIC.c:204:23:MNVIC_uddtSetIRQGroup	2
