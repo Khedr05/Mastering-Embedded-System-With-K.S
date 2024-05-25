@@ -1,0 +1,8 @@
+../Src/Scheduler.c:39:6:OS_SVC	4
+../Src/Scheduler.c:57:5:OS_SVC_Set	5
+../Src/Scheduler.c:77:6:PendSV_Handler	1
+../Src/Scheduler.c:83:6:SherifOS_CreateMainStack	1
+../Src/Scheduler.c:94:19:SherifOS_init	2
+../Src/Scheduler.c:122:6:IdleTask	1
+../Src/Scheduler.c:132:6:SherifOS_CreateTaskStack	2
+../Src/Scheduler.c:170:19:SherifOS_CreateTask	2

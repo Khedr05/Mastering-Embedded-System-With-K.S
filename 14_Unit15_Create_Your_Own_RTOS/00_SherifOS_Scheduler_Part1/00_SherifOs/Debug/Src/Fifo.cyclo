@@ -1,0 +1,5 @@
+../Src/Fifo.c:13:18:FIFO_uddtInitBuffer	3
+../Src/Fifo.c:34:18:FIFO_uddtPushData	7
+../Src/Fifo.c:78:18:FIFO_uddtPopData	7
+../Src/Fifo.c:122:18:FIFO_uddtIsFull	8
+../Src/Fifo.c:157:18:FIFO_uddtPrintBuffer	7
