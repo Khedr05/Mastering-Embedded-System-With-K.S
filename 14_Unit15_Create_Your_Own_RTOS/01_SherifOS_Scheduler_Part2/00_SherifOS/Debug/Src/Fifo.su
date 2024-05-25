@@ -1,0 +1,5 @@
+../Src/Fifo.c:13:18:FIFO_uddtInitBuffer	32	static
+../Src/Fifo.c:34:18:FIFO_uddtPushData	24	static
+../Src/Fifo.c:78:18:FIFO_uddtPopData	24	static
+../Src/Fifo.c:122:18:FIFO_uddtIsFull	24	static
+../Src/Fifo.c:157:18:FIFO_uddtPrintBuffer	32	static

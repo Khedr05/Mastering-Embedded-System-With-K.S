@@ -1,0 +1,13 @@
+../Src/Scheduler.c:45:6:PendSV_Handler	1
+../Src/Scheduler.c:84:6:SherifOS_CreateMainStack	1
+../Src/Scheduler.c:95:19:SherifOS_init	2
+../Src/Scheduler.c:123:6:IdleTask	1
+../Src/Scheduler.c:133:6:SherifOS_CreateTaskStack	2
+../Src/Scheduler.c:171:19:SherifOS_CreateTask	2
+../Src/Scheduler.c:205:6:BubbleSort	4
+../Src/Scheduler.c:226:6:SherifOS_UpdateScheduleTable	8
+../Src/Scheduler.c:279:6:DecideWhatNext	5
+../Src/Scheduler.c:307:6:OS_SVC	5
+../Src/Scheduler.c:335:6:SherifOS_OS_SVC_Set	5
+../Src/Scheduler.c:352:19:SherifOS_ActivateTask	1
+../Src/Scheduler.c:362:19:SherifOS_TerminateTask	1
