@@ -59,7 +59,7 @@ void HW_init()
 
 void triggerOsPendSV(void)
 {
-	SCB->ICSR |= SCB_ICSR_PENDSVCLR_Msk;
+	SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
 }
 
 
