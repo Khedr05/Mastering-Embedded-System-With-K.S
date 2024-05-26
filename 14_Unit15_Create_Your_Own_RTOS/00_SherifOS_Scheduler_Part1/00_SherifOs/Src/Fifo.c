@@ -10,189 +10,94 @@
 #include "Fifo.h"
 
 
-EN_FIFO_status_t FIFO_uddtInitBuffer(ST_FIFO_Buffer_t* PS_copyUddtFifoBuf , DATA_WIDTH *P_copyUddtBuf , uint32 copy_U32BufLength)
+Buffer_status_t FIFO_uddtInitBuffer(FIFO_Buffer_t* fifo, DATA_WIDTH *buff , uint32 length)
 {
-	EN_FIFO_status_t ret = FIFO_NOK;
 
-	if((PS_copyUddtFifoBuf != PTR_NULL) && (P_copyUddtBuf != PTR_NULL))
-	{
-		PS_copyUddtFifoBuf->base = P_copyUddtBuf;
-		PS_copyUddtFifoBuf->head = P_copyUddtBuf;
-		PS_copyUddtFifoBuf->tail = P_copyUddtBuf;
-		PS_copyUddtFifoBuf->length = copy_U32BufLength;
-		PS_copyUddtFifoBuf->count = 0;
-		ret = FIFO_OK;
-	}
-	else
-	{
-		ret = FIFO_IS_PTR_NULL;
-	}
+	if(!buff )
+		return FIFO_NULL;
 
-	return ret;
+	fifo->base = buff ;
+	fifo->head = fifo->base ;
+	fifo->tail = fifo->base ;
+	fifo->length = length;
+	fifo->counter=0;
+
+	return FIFO_NO_ERROR;
+
 }
 
-EN_FIFO_status_t FIFO_uddtPushData(ST_FIFO_Buffer_t* PS_copyUddtFifoBuf , DATA_WIDTH copyUddtData)
+
+Buffer_status_t FIFO_uddtEnqueue(FIFO_Buffer_t* fifo , DATA_WIDTH item)
 {
-	EN_FIFO_status_t ret = FIFO_NOK;
 
-	if((PS_copyUddtFifoBuf != PTR_NULL))
-	{
-		if( (PS_copyUddtFifoBuf->head != PTR_NULL) && (PS_copyUddtFifoBuf->base != PTR_NULL) && (PS_copyUddtFifoBuf->tail != PTR_NULL) )
-		{
-			ret = FIFO_uddtIsFull(PS_copyUddtFifoBuf);
-			if(ret != FIFO_IS_FULL)
-			{
-				*(PS_copyUddtFifoBuf->head) = copyUddtData;
-				PS_copyUddtFifoBuf->count++;
+	/* fifo null*/
 
-				if( (PS_copyUddtFifoBuf->head) ==
-						(PS_copyUddtFifoBuf->base + (PS_copyUddtFifoBuf->length * sizeof(DATA_WIDTH))))
-				{
-					PS_copyUddtFifoBuf->head = PS_copyUddtFifoBuf->base;
-					ret = FIFO_OK;
-				}
-				else
-				{
-					PS_copyUddtFifoBuf->head++;
-					ret = FIFO_OK;
-				}
-			}
-			else
-			{
-				/* Do Nothing */
-			}
-		}
-		else
-		{
-			ret = FIFO_IS_NULL;
-		}
-	}
+	if (!fifo->base || !fifo->length)
+		return FIFO_NULL;
+	/*fifo is full*/
+
+	if ((fifo->head == fifo->tail) && (fifo->counter == fifo->length))
+		return FIFO_FULL;
+
+	*(fifo->tail)=item;
+	fifo->counter++;
+
+	/*for circular fifo again */
+
+	/* circular enqueue */
+	if (fifo->tail == (((unsigned int)fifo->base + (4*fifo->length )) - 4 ))
+		fifo->tail = fifo->base;
 	else
-	{
-		ret = FIFO_IS_PTR_NULL;
-	}
+		fifo->tail++;
 
-	return ret;
+	return FIFO_NO_ERROR;
+
+
 }
 
-EN_FIFO_status_t FIFO_uddtPopData(ST_FIFO_Buffer_t* PS_copyUddtFifoBuf , DATA_WIDTH *copyUddtRetOfData)
+
+Buffer_status_t FIFO_uddtDequeue(FIFO_Buffer_t* fifo , DATA_WIDTH *item)
 {
-	EN_FIFO_status_t ret = FIFO_NOK;
+	/* check fifo valid */
+	if (!fifo->base || !fifo->length)
+		return FIFO_NULL;
 
-	if((PS_copyUddtFifoBuf != PTR_NULL))
-	{
-		if( (PS_copyUddtFifoBuf->head != PTR_NULL) && (PS_copyUddtFifoBuf->base != PTR_NULL) && (PS_copyUddtFifoBuf->tail != PTR_NULL) )
-		{
-			ret = FIFO_uddtIsFull(PS_copyUddtFifoBuf);
-			if(ret == FIFO_IS_EMPTY)
-			{
-				/* Do Nothing */
-			}
-			else
-			{
-				*copyUddtRetOfData = *(PS_copyUddtFifoBuf->tail);
-				PS_copyUddtFifoBuf->count--;
+	/* fifo empty */
+	if (fifo->head == fifo->tail)
+		return FIFO_EMPTY;
 
-				if( (PS_copyUddtFifoBuf->tail) ==
-						(PS_copyUddtFifoBuf->base + (PS_copyUddtFifoBuf->length * sizeof(DATA_WIDTH))))
-				{
-					PS_copyUddtFifoBuf->tail = PS_copyUddtFifoBuf->base;
-					ret = FIFO_OK;
-				}
-				else
-				{
-					PS_copyUddtFifoBuf->tail++;
-					ret = FIFO_OK;
-				}
-			}
-		}
-		else
-		{
-			ret = FIFO_IS_NULL;
-		}
-	}
+
+
+	*item = *(fifo->head);
+	fifo->counter--;
+
+	/* circular dequeue */
+	if (fifo->head == (((unsigned int)fifo->base + (4*fifo->length )) - 4 ))
+		fifo->head = fifo->base;
 	else
-	{
-		ret = FIFO_IS_PTR_NULL;
-	}
+		fifo->head++;
 
-	return ret;
+	return FIFO_NO_ERROR;
 }
 
-EN_FIFO_status_t FIFO_uddtIsFull(ST_FIFO_Buffer_t* PS_copyUddtFifoBuf)
+
+Buffer_status_t FIFO_uddtIsFull(FIFO_Buffer_t* fifo)
 {
-	EN_FIFO_status_t ret = FIFO_NOK;
 
-	if((PS_copyUddtFifoBuf != PTR_NULL))
-	{
-		if( (PS_copyUddtFifoBuf->head != PTR_NULL) && (PS_copyUddtFifoBuf->base != PTR_NULL) && (PS_copyUddtFifoBuf->tail != PTR_NULL) )
-		{
-			if(PS_copyUddtFifoBuf->count == PS_copyUddtFifoBuf->length)
-			{
-				ret = FIFO_IS_FULL;
-			}
-			else if(PS_copyUddtFifoBuf->count < PS_copyUddtFifoBuf->length)
-			{
-				ret = FIFO_NEITHER_FULL_NOR_EMPTY;
-			}
-			else if(PS_copyUddtFifoBuf->count == 0)
-			{
-				ret = FIFO_IS_EMPTY;
-			}
-			else{/* Do Nothing */};
-		}
-		else
-		{
-			ret = FIFO_IS_NULL;
-		}
-	}
-	else
-	{
-		ret = FIFO_IS_PTR_NULL;
-	}
+	if(!fifo->head || !fifo->base || !fifo->tail)
+		return FIFO_NULL;
+	if(fifo->counter == fifo->length)
+		return FIFO_FULL;
 
-	return ret;
+	return FIFO_NO_ERROR;
 }
 
-EN_FIFO_status_t FIFO_uddtPrintBuffer(ST_FIFO_Buffer_t* PS_copyUddtFifoBuf)
-{
-	EN_FIFO_status_t ret = FIFO_NOK;
 
-	if((PS_copyUddtFifoBuf != PTR_NULL))
-	{
-		if( (PS_copyUddtFifoBuf->head != PTR_NULL) && (PS_copyUddtFifoBuf->base != PTR_NULL) && (PS_copyUddtFifoBuf->tail != PTR_NULL) )
-		{
-			DATA_WIDTH *temp;
-			uint32 i;
 
-			ret = FIFO_uddtIsFull(PS_copyUddtFifoBuf);
-			if(ret == FIFO_IS_EMPTY)
-			{
-				printf("FIFO Is Empty \n");
-			}
-			else
-			{
-				temp = PS_copyUddtFifoBuf->tail;
-				printf("\n============= FIFO DATA ============\n");
 
-				for(i=0 ; i<PS_copyUddtFifoBuf->count ; i++)
-				{
-					printf("\t %X \n",*temp);
-					temp++;
-				}
-				printf("\n============= FIFO DATA END ============\n");
-			}
-		}
-		else
-		{
-			ret = FIFO_IS_NULL;
-		}
-	}
-	else
-	{
-		ret = FIFO_IS_PTR_NULL;
-	}
 
-	return ret;
-}
+
+
+
+
 
