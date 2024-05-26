@@ -1,0 +1,5 @@
+"./Src/CortexMxOsPorting.o"
+"./Src/Fifo.o"
+"./Src/Scheduler.o"
+"./Src/main.o"
+"./Startup/startup_stm32f103c8tx.o"

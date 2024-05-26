@@ -1,0 +1,11 @@
+D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/13_SherifOS/CMSIS_V5/core_cm3.h:1639:22:__NVIC_SetPriority	2
+D:/Embedded System Diploma/Mastring Embedded System With K.S/01_StmCube_Workspace/13_SherifOS/CMSIS_V5/core_cm3.h:1838:26:SysTick_Config	2
+../Src/CortexMxOsPorting.c:14:6:HardFault_Handler	1
+../Src/CortexMxOsPorting.c:18:6:MemManage_Handler	1
+../Src/CortexMxOsPorting.c:22:6:BusFault_Handler	1
+../Src/CortexMxOsPorting.c:26:6:UsageFault_Handler	1
+../Src/CortexMxOsPorting.c:33:28:SVC_Handler	1
+../Src/CortexMxOsPorting.c:45:6:HW_init	1
+../Src/CortexMxOsPorting.c:63:6:triggerOsPendSV	1
+../Src/CortexMxOsPorting.c:69:6:StartTicker	1
+../Src/CortexMxOsPorting.c:81:6:SysTick_Handler	1
