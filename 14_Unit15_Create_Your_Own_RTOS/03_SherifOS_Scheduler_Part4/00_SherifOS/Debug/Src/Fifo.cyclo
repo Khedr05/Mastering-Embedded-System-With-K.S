@@ -1,0 +1,4 @@
+../Src/Fifo.c:13:17:FIFO_uddtInitBuffer	2
+../Src/Fifo.c:30:17:FIFO_uddtEnqueue	6
+../Src/Fifo.c:59:17:FIFO_uddtDequeue	5
+../Src/Fifo.c:84:17:FIFO_uddtIsFull	5

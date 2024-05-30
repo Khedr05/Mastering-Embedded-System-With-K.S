@@ -1,0 +1,4 @@
+../Src/main.c:17:6:task1	16	static
+../Src/main.c:42:6:task2	16	static
+../Src/main.c:66:6:task3	16	static
+../Src/main.c:90:5:main	16	static
